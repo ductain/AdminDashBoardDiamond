@@ -1,6 +1,6 @@
 .login-background {
   height: 100vh;
-  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  background: url(../../public/assets/bg-login-admin.png) no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +53,7 @@
 }
 
 .error-message {
-  color: red;
+  color: #ff0000b2;
   margin-bottom: 10px;
 }
 
@@ -62,7 +62,7 @@
   height: 40px;
   border-radius: 5px;
   border: none;
-  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  background: #007bff;
   color: #000;
   font-weight: bold;
   cursor: pointer;
