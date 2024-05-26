@@ -87,9 +87,6 @@ const Login = () => {
               Login
             </button>
           </div>
-          <div>
-            <span className="forgot-password">Forgot password?</span>
-          </div>
         </div>
       </div>
     </div>
