@@ -1,0 +1,44 @@
+.linechart h5 {
+    font-weight: 700;
+    margin: 0px;
+  }
+  .linechart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ant-typography.lastweek {
+    color: #8c8c8c;
+    font-weight: 600;
+  }
+  
+  .sales ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+  }
+  
+  .sales ul li:first-child span.anticon {
+    color: #b37feb;
+  }
+  
+  .sales ul li:last-child span.anticon {
+    color: #1890ff;
+  }
+  .sales ul li {
+    color: #8c8c8c;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .bnb2 {
+    color: #52c41a;
+    font-weight: 700;
+  }
+
+  .full-width {
+    max-width: 100% !important;
+  }

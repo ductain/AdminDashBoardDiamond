@@ -12,7 +12,7 @@ const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
-  const { loading, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
