@@ -88,6 +88,13 @@ const Accounts = () => {
         />
       ),
     },
+    {
+      title: "Action", key: "action", render: (text, record) => (
+        <Link to={`/accounts/edit/${record.id}`}>
+          <Button type="primary">Edit</Button>
+        </Link>
+      )
+    }
   ];
   if (!users.length) {
     return <MySpin />;
