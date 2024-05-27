@@ -8,6 +8,7 @@ import ProtectedRoute from "../config/ProtectedRoute";
 import AccountCreate from "../pages/AccountCreate";
 import Request from "../pages/Request";
 import RequestDetail from "../pages/RequestDetail";
+import EditAccount from "../pages/EditAccount";
 
 export const routes = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const routes = createBrowserRouter([
       {
         path: "requests/detail/:id",
         element: <RequestDetail />,
+      },
+      {
+        path: "accounts/edit/:id",
+        element: <EditAccount />,
       },
       {
         path: "accounts/create",
