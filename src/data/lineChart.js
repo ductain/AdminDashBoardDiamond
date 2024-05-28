@@ -3,13 +3,13 @@ import axios from "axios";
 export const fetchRequestsAndResultsData = async () => {
   try {
     const [requestsRes, resultsRes] = await Promise.all([
-      axios.get('http://localhost:8080/api/requests'),
-      axios.get('http://localhost:8080/api/results'),
+      axios.get('http://localhost:8080/api/requests', { withCredentials: true }),
+      axios.get('http://localhost:8080/api/results', { withCredentials: true }),
     ]);
 
     return {
-      requests: requestsRes.data.requests,
-      results: resultsRes.data.results
+      requests: requestsRes.data.requests[0],
+      results: resultsRes.data.results[0]
     };
   } catch (error) {
     console.error("Error fetching data:", error);

@@ -46,7 +46,7 @@ function LineChart() {
       height: 350
     },
     stroke: {
-      curve: 'smooth' // This makes the lines smooth
+      curve: 'smooth'
     },
     dataLabels: {
       enabled: false
