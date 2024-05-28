@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card, Row, Col, Spin, Typography } from "antd";
-import { UserOutlined, InfoCircleOutlined, CrownOutlined } from "@ant-design/icons";
+import { UserOutlined, InfoCircleOutlined, SketchOutlined } from "@ant-design/icons";
 import "../css/RequestDetail.css";
 
 const { Title, Text } = Typography;
@@ -49,7 +49,7 @@ const RequestDetail = () => {
         </Col>
         <Col span={8}>
           <Card title="Diamond Information" bordered={false} className="info-card">
-            <CrownOutlined className="icon" />
+            <SketchOutlined className="icon" />
             <img src={request.requestImage} alt="Request" className="diamond-image" />
             <p><Text strong>Carat Weight:</Text> {request.caratWeight}</p>
             <p><Text strong>Clarity:</Text> {request.clarity}</p>
