@@ -1,107 +1,45 @@
-const eChart = {
-    series: [
-      {
-        name: "Sales",
-        data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-        color: "#fff",
-      },
-    ],
-  
-    options: {
-      chart: {
-        type: "bar",
-        width: "100%",
-        height: "auto",
-  
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "55%",
-          borderRadius: 5,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        show: true,
-        width: 1,
-        colors: ["transparent"],
-      },
-      grid: {
-        show: true,
-        borderColor: "#ccc",
-        strokeDashArray: 2,
-      },
-      xaxis: {
-        categories: [
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-        ],
-        labels: {
-          show: true,
-          align: "right",
-          minWidth: 0,
-          maxWidth: 160,
-          style: {
-            colors: [
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-            ],
-          },
-        },
-      },
-      yaxis: {
-        labels: {
-          show: true,
-          align: "right",
-          minWidth: 0,
-          maxWidth: 160,
-          style: {
-            colors: [
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-              "#fff",
-            ],
-          },
-        },
-      },
-  
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return "$ " + val + " thousands";
-          },
-        },
-      },
-    },
-  };
-  
-  export default eChart;
-  
+import axios from "axios";
+
+export const fetchUserData = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/api/users', { withCredentials: true });
+    console.log(response.data.users);
+    return response.data.users;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+export const processUserData = (data) => {
+  const monthlyCounts = {};
+  const years = new Set();
+
+  data.forEach(user => {
+    const date = new Date(user.createdAt);
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const year = date.getFullYear();
+    const monthYear = `${month}-${year}`;
+
+    if (!monthlyCounts[monthYear]) {
+      monthlyCounts[monthYear] = 0;
+    }
+    monthlyCounts[monthYear]++;
+    years.add(year);
+  });
+
+  const sortedYears = Array.from(years).sort();
+  const series = sortedYears.map(year => {
+    const yearData = [];
+    for (let i = 0; i < 12; i++) {
+      const month = new Date(2020, i).toLocaleString('en-US', { month: 'short' });
+      const key = `${month}-${year}`;
+      yearData.push(monthlyCounts[key] || 0);
+    }
+    return { name: year, data: yearData };
+  });
+
+  const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return { series, categories, years: sortedYears };
+};

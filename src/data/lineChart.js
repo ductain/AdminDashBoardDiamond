@@ -1,88 +1,34 @@
-const lineChart = {
-    series: [
-      {
-        name: "Mobile apps",
-        data: [350, 40, 300, 220, 500, 250, 400, 230, 500],
-        offsetY: 0,
-      },
-      {
-        name: "Websites",
-        data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-        offsetY: 0,
-      },
-    ],
-  
-    options: {
-      chart: {
-        width: "100%",
-        height: 350,
-        type: "area",
-        toolbar: {
-          show: false,
-        },
-      },
-  
-      legend: {
-        show: false,
-      },
-  
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "smooth",
-      },
-  
-      yaxis: {
-        labels: {
-          style: {
-            fontSize: "14px",
-            fontWeight: 600,
-            colors: ["#8c8c8c"],
-          },
-        },
-      },
-  
-      xaxis: {
-        labels: {
-          style: {
-            fontSize: "14px",
-            fontWeight: 600,
-            colors: [
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-              "#8c8c8c",
-            ],
-          },
-        },
-        categories: [
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-        ],
-      },
-  
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return val;
-          },
-        },
-      },
-    },
-  };
-  
-  export default lineChart;
-  
+import axios from "axios";
+
+export const fetchRequestsAndResultsData = async () => {
+  try {
+    const [requestsRes, resultsRes] = await Promise.all([
+      axios.get('http://localhost:8080/api/requests', { withCredentials: true }),
+      axios.get('http://localhost:8080/api/results', { withCredentials: true }),
+    ]);
+
+    return {
+      requests: requestsRes.data.requests[0],
+      results: resultsRes.data.results[0]
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const processApiData = (data, dateField) => {
+  const monthlyCounts = {};
+
+  data.forEach(item => {
+    const date = new Date(item[dateField]);
+    const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
+
+    if (!monthlyCounts[monthYear]) {
+      monthlyCounts[monthYear] = 0;
+    }
+    monthlyCounts[monthYear]++;
+  });
+
+  return monthlyCounts;
+};
