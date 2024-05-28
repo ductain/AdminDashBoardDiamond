@@ -22,13 +22,11 @@ const AccountCreate = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log("Received values of form:", values);
     axios
       .post("http://localhost:8080/api/createNewUser", values, {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         message.success("Created successfully");
         navigate("/accounts");
       })
