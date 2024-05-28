@@ -8,8 +8,8 @@ export const fetchRequestsAndResultsData = async () => {
     ]);
 
     return {
-      requests: requestsRes.data.requests[0],
-      results: resultsRes.data.results[0]
+      requests: requestsRes.data.requests,
+      results: resultsRes.data.results
     };
   } catch (error) {
     console.error("Error fetching data:", error);
