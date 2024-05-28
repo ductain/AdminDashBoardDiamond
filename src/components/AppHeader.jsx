@@ -28,7 +28,7 @@ const AppHeader = () => {
         display: "flex",
         justifyContent: "end",
         alignItems: "center",
-        position: "fixed",
+        
         zIndex: 1,
         width: "100%",
         padding: "0 15%",
