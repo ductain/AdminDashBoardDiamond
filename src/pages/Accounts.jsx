@@ -87,13 +87,6 @@ const Accounts = () => {
           onChange={(checked) => handleStatusChange(checked, record.username)}
         />
       ),
-    },
-    {
-      title: "Action", key: "action", render: (text, record) => (
-        <Link to={`/accounts/edit/${record.id}`}>
-          <Button type="primary">Edit</Button>
-        </Link>
-      )
     }
   ];
   if (!users.length) {

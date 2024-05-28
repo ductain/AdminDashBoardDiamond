@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { Row, Col, Typography, Spin, Button } from "antd";
+import { Typography, Spin, Button } from "antd";
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { fetchUserData, processUserData } from '../data/eChart';
 import '../css/EChart.css';
@@ -128,42 +128,6 @@ function EChart() {
               type="bar"
               height={350}
             />
-          </div>
-          <div className="chart-vistior">
-            <Title level={5}>Active Users</Title>
-            <Paragraph className="lastweek">
-              than last week <span className="bnb2">+30%</span>
-            </Paragraph>
-            <Paragraph className="lastweek">
-              We have created multiple options for you to put together and customise
-              into pixel perfect pages.
-            </Paragraph>
-            <Row gutter={[16, 16]}>
-              <Col xs={6} xl={6} sm={6} md={6}>
-                <div className="chart-visitor-count">
-                  <Title level={4}>3,6K</Title>
-                  <span>Users</span>
-                </div>
-              </Col>
-              <Col xs={6} xl={6} sm={6} md={6}>
-                <div className="chart-visitor-count">
-                  <Title level={4}>2m</Title>
-                  <span>Clicks</span>
-                </div>
-              </Col>
-              <Col xs={6} xl={6} sm={6} md={6}>
-                <div className="chart-visitor-count">
-                  <Title level={4}>$772</Title>
-                  <span>Sales</span>
-                </div>
-              </Col>
-              <Col xs={6} xl={6} sm={6} md={6}>
-                <div className="chart-visitor-count">
-                  <Title level={4}>82</Title>
-                  <span>Items</span>
-                </div>
-              </Col>
-            </Row>
           </div>
         </>
       )}

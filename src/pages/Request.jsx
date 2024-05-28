@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Space, Table, Tag } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import MySpin from "../components/MySpin";
 
 const Request = () => {
   const [requests, setRequests] = useState([]);
@@ -16,16 +17,16 @@ const Request = () => {
           console.log(error);
         });
     };
-    getAllRequests()
+    getAllRequests();
   }, []);
   const statusColors = {
-    Pending: 'blue',
-    Approved: 'green',
-    Received: 'cyan',
-    Valuated: 'purple',
-    Completed: 'gold',
-    Locked: 'red',
-    Lost: 'grey',
+    Pending: "blue",
+    Approved: "green",
+    Received: "cyan",
+    Valuated: "purple",
+    Completed: "gold",
+    Locked: "red",
+    Lost: "grey",
   };
   const columns = [
     {
@@ -39,7 +40,11 @@ const Request = () => {
       dataIndex: "requestImage",
       key: "requestImage",
       render: (image) => (
-        <img src={image} alt="Request" style={{ width: '50px', height: '50px' }} />
+        <img
+          src={image}
+          alt="Request"
+          style={{ width: "50px", height: "50px" }}
+        />
       ),
     },
     {
@@ -69,24 +74,22 @@ const Request = () => {
       ),
     },
     {
-      title: 'Detail',
-      key: 'detail',
+      title: "Detail",
+      key: "detail",
       render: (text, record) => (
         <Space size="middle">
-          <Link to={`/requests/detail/${record.RequestID}`}>
-            . . .
-          </Link>
+          <Link to={`/requests/detail/${record.RequestID}`}>. . .</Link>
         </Space>
       ),
     },
-
   ];
+  if (!requests.length) return <MySpin />;
 
   return (
     <>
       <Table columns={columns} dataSource={requests} />;
     </>
   );
-}
+};
 
-export default Request
+export default Request;

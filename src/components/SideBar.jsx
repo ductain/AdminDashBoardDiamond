@@ -14,12 +14,11 @@ const SiderComponent = () => {
       }}
     >
       <div
-        style={{marginBottom: '30px'}}
       >
         <img
-          src="assets/DiamondLogo.PNG"
+          src="https://t4.ftcdn.net/jpg/02/39/44/75/360_F_239447528_qWYSonUIwGoNC290SfOBq8Gvy3x8ownV.jpg"
           alt="logo"
-          style={{ width: "100%", height: "100px" }}
+          style={{ width: "100%", height: "180px" }}
         />
       </div>
       <Menu theme='dark' defaultSelectedKeys={["1"]} mode="inline">

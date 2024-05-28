@@ -41,8 +41,6 @@ const RequestDetail = () => {
         <Col span={8}>
           <Card title="Request Information" bordered={false} className="info-card">
             <InfoCircleOutlined className="icon" />
-            <p><Text strong>Process ID:</Text> {request.ProcessID}</p>
-            <p><Text strong>User ID:</Text> {request.UserID}</p>
             <p><Text strong>Created Date:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
             <p><Text strong>Updated Date:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
             <p><Text strong>Note:</Text> {request.note}</p>
@@ -53,7 +51,6 @@ const RequestDetail = () => {
           <Card title="Diamond Information" bordered={false} className="info-card">
             <CrownOutlined className="icon" />
             <img src={request.requestImage} alt="Request" className="diamond-image" />
-            <p><Text strong>Diamond ID:</Text> {request.DiamondID}</p>
             <p><Text strong>Carat Weight:</Text> {request.caratWeight}</p>
             <p><Text strong>Clarity:</Text> {request.clarity}</p>
             <p><Text strong>Color:</Text> {request.color}</p>
@@ -74,7 +71,6 @@ const RequestDetail = () => {
             <p><Text strong>Last Name:</Text> {request.lastName}</p>
             <p><Text strong>Email:</Text> {request.email}</p>
             <p><Text strong>Phone:</Text> {request.phone}</p>
-            <p><Text strong>Username:</Text> {request.username}</p>
           </Card>
         </Col>
       </Row>
