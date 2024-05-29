@@ -3,12 +3,14 @@ import AdminLayout from "../layout/AdminLayout";
 import DashBoard from "../pages/DashBoard";
 import Accounts from "../pages/Accounts";
 import ErrorPage from "../pages/ErrorPage";
-import Login from "../pages/Login";
+import Login from "../pages/SignIn";
 import ProtectedRoute from "../config/ProtectedRoute";
 import AccountCreate from "../pages/AccountCreate";
 import Request from "../pages/Request";
 import RequestDetail from "../pages/RequestDetail";
 import EditAccount from "../pages/EditAccount";
+import Billing from "../pages/Billing";
+
 
 export const routes = createBrowserRouter([
   {
@@ -43,6 +45,10 @@ export const routes = createBrowserRouter([
       {
         path: "accounts/create",
         element: <AccountCreate />,
+      },
+      {
+        path: "billing",
+        element: <Billing />,
       },
     ],
   },

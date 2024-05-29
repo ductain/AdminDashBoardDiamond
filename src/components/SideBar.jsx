@@ -31,6 +31,9 @@ const SiderComponent = () => {
         <Menu.Item key="3" icon={<SolutionOutlined />}>
           <Link to="/requests">Requests</Link>
         </Menu.Item>
+        <Menu.Item key="4" icon={<SolutionOutlined />}>
+          <Link to="/billing">Billings</Link>
+        </Menu.Item>
       </Menu>
     </Sider>
   );

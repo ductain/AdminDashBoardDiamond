@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Switch, Modal } from "antd";
+import { Button, Table, Switch, Modal, Card, Row, Col, Typography } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MySpin from "../components/MySpin";
 
+const { Title } = Typography;
+
 const Accounts = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const getAllAccounts = async () => {
+    setLoading(true);
     await axios
       .get("http://localhost:8080/api/users", { withCredentials: true })
       .then((res) => {
         const nonAdminUsers = res.data.users.filter(user => user.role !== 'Admin');
         setUsers(nonAdminUsers);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
+
   useEffect(() => {
     getAllAccounts();
   }, []);
@@ -40,6 +48,7 @@ const Accounts = () => {
       },
     });
   };
+
   const columns = [
     {
       title: "No.",
@@ -98,27 +107,38 @@ const Accounts = () => {
         </Link>
       ),
     },
-
   ];
-  if (!users.length) {
+
+  if (loading) {
     return <MySpin />;
   }
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "10px",
-        }}
-      >
-        <Link to={"/accounts/create"}>
-          <Button type="primary">Create New User</Button>
-        </Link>
-      </div>
-      <Table columns={columns} dataSource={users} />;
-    </>
+    <div className="tabled">
+      <Row gutter={[24, 0]}>
+        <Col xs="24" xl={24}>
+          <Card
+            bordered={false}
+            className="criclebox tablespace mb-24"
+            title="Accounts Table"
+            extra={
+              <Link to={"/accounts/create"}>
+                <Button type="primary">Create New User</Button>
+              </Link>
+            }
+          >
+            <div className="table-responsive">
+              <Table
+                columns={columns}
+                dataSource={users}
+                pagination={{ pageSize: 10 }}
+                className="ant-border-space"
+              />
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   );
 };
 
