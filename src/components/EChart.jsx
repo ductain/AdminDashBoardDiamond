@@ -12,7 +12,7 @@ function EChart() {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState({ series: [], categories: [], years: [] });
   const [currentYear, setCurrentYear] = useState(null);
-
+  const [currentYearAtTable, setCurrentYearAtTable] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,11 +27,17 @@ function EChart() {
     fetchData();
   }, []);
 
+
   useEffect(() => {
     if (userData.length > 0) {
       const processedData = processUserData(userData);
       setChartData(processedData);
-      setCurrentYear(processedData.years[0]); // Set the initial year
+      const thisYear = new Date().getFullYear();
+      if (processedData.years.includes(thisYear)) {
+        setCurrentYear(thisYear);
+      } else {
+        setCurrentYear(processedData.years[0]);
+      }
     }
   }, [userData]);
 
@@ -45,14 +51,19 @@ function EChart() {
   const handlePrevYear = () => {
     const currentIndex = chartData.years.indexOf(currentYear);
     if (currentIndex > 0) {
-      updateChartDataForYear(chartData.years[currentIndex - 1]);
+      const prevYear = chartData.years[currentIndex - 1];
+      updateChartDataForYear(prevYear);
+      setCurrentYearAtTable(prevYear + 1);
     }
+
+    console.log(currentYearAtTable);
   };
 
   const handleNextYear = () => {
     const currentIndex = chartData.years.indexOf(currentYear);
-    if (currentIndex < chartData.years.length - 1) {
-      updateChartDataForYear(chartData.years[currentIndex + 1]);
+    if (currentIndex < currentYearAtTable) {
+      const nextYear = chartData.years[currentIndex + 1];
+      updateChartDataForYear(nextYear);
     }
   };
 

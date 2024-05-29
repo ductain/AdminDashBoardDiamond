@@ -5,6 +5,7 @@ import { MinusOutlined } from "@ant-design/icons";
 import { fetchRequestsAndResultsData, processApiData } from '../data/lineChart';
 import '../css/LineChart.css';
 
+
 const { Title, Paragraph } = Typography;
 
 function LineChart() {

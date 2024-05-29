@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Tag } from "antd";
+import {
+  Space,
+  Table,
+  Tag,
+  Card,
+  Row,
+  Col,
+  Radio,
+  Typography,
+  Button,
+  Avatar,
+  Progress,
+  message,
+} from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { EditOutlined } from "@ant-design/icons";
 import MySpin from "../components/MySpin";
+
+const { Title } = Typography;
 
 const Request = () => {
   const [requests, setRequests] = useState([]);
+  const [filter, setFilter] = useState("All");
+
   useEffect(() => {
     const getAllRequests = async () => {
       await axios
@@ -19,6 +37,7 @@ const Request = () => {
     };
     getAllRequests();
   }, []);
+
   const statusColors = {
     Pending: "blue",
     Approved: "green",
@@ -28,6 +47,7 @@ const Request = () => {
     Locked: "red",
     Lost: "grey",
   };
+
   const columns = [
     {
       title: "No.",
@@ -78,17 +98,57 @@ const Request = () => {
       key: "detail",
       render: (text, record) => (
         <Space size="middle">
-          <Link to={`/requests/detail/${record.RequestID}`}>. . .</Link>
+          <Link to={`/requests/detail/${record.RequestID}`}>
+            <EditOutlined />
+          </Link>
         </Space>
       ),
     },
   ];
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const filteredRequests = filter === "All"
+    ? requests
+    : requests.filter(request => request.processStatus === filter);
+
   if (!requests.length) return <MySpin />;
 
   return (
-    <>
-      <Table columns={columns} dataSource={requests} />;
-    </>
+    <div className="tabled">
+      <Row gutter={[24, 0]}>
+        <Col xs="24" xl={24}>
+          <Card
+            bordered={false}
+            className="criclebox tablespace mb-24"
+            title="Requests Table"
+            extra={
+              <Radio.Group onChange={handleFilterChange} defaultValue="All">
+                <Radio.Button value="All">All</Radio.Button>
+                <Radio.Button value="Pending">Pending</Radio.Button>
+                <Radio.Button value="Approved">Approved</Radio.Button>
+                <Radio.Button value="Received">Received</Radio.Button>
+                <Radio.Button value="Valuated">Valuated</Radio.Button>
+                <Radio.Button value="Completed">Completed</Radio.Button>
+                <Radio.Button value="Locked">Locked</Radio.Button>
+                <Radio.Button value="Lost">Lost</Radio.Button>
+              </Radio.Group>
+            }
+          >
+            <div className="table-responsive">
+              <Table
+                columns={columns}
+                dataSource={filteredRequests}
+                pagination={false}
+                className="ant-border-space"
+              />
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

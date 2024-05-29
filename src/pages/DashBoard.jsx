@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Card, Row, Col } from "antd";
-import { UserOutlined, SketchOutlined, SolutionOutlined, TransactionOutlined, PropertySafetyOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import EChart from "../components/EChart";
+import { Row, Col, Card, Typography } from "antd";
+import { UserOutlined, SendOutlined, ReconciliationOutlined, WalletOutlined } from "@ant-design/icons";
+import Echart from "../components/EChart";
 import LineChart from "../components/LineChart";
 
-const DashBoard = () => {
+function DashBoard() {
+  const { Title } = Typography;
   const [countUser, setCountUser] = useState(0);
-  const [constDiamond, setCountDiamond] = useState(0);
-  const [constRequest, setCountRequest] = useState(0);
-  const [constPayment, setCountPayment] = useState(0);
-  const [constProfit, setCountProfit] = useState(0);
+  const [countDiamond, setCountDiamond] = useState(0);
+  const [countRequest, setCountRequest] = useState(0);
+
   useEffect(() => {
     const getTotalDiamond = async () => {
       await axios
@@ -24,6 +24,7 @@ const DashBoard = () => {
     };
     getTotalDiamond();
   }, []);
+
   useEffect(() => {
     const getTotalUser = async () => {
       await axios
@@ -37,9 +38,11 @@ const DashBoard = () => {
     };
     getTotalUser();
   }, []);
+
   useEffect(() => {
     const getTotalRequest = async () => {
-      await axios.get("http://localhost:8080/api/countRequest", { withCredentials: true })
+      await axios
+        .get("http://localhost:8080/api/countRequest", { withCredentials: true })
         .then((res) => {
           setCountRequest(res.data.count);
         })
@@ -50,79 +53,90 @@ const DashBoard = () => {
     getTotalRequest();
   }, []);
 
+  const count = [
+    {
+      today: "Total Users",
+      title: countUser.toString(),
+      icon: <UserOutlined style={{ fontSize: '32px' }} />,
+    },
+    {
+      today: "Total Diamonds",
+      title: countDiamond.toString(),
+      icon: <SendOutlined style={{ fontSize: '32px' }} />,
+    },
+    {
+      today: "Total Requests",
+      title: countRequest.toString(),
+      icon: <ReconciliationOutlined style={{ fontSize: '32px' }} />,
+    },
+    {
+      today: "Other Metric",
+      title: "Data",
+      icon: <WalletOutlined style={{ fontSize: '32px' }} />,
+    },
+  ];
+
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Card style={{ width: '19%', border: '1px solid gray', height: '8.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h2 style={{ fontSize: '13px' }}>Total of accounts</h2>
-            <UserOutlined
-              style={{ fontSize: "25px", borderRadius: '0.25rem', padding: '0.25rem', color: '#3b82f6', backgroundColor: '#bfdbfe' }}
-            />
-          </div>
-          <p style={{ fontWeight: 'bold' }}>
-            {countUser}
-          </p>
-        </Card>
-        <Card style={{ width: '19%', border: '1px solid gray', height: '8.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h2 style={{ fontSize: '13px' }}>Total of diamonds</h2>
-            <SketchOutlined
-              style={{ fontSize: "25px", borderRadius: '0.25rem', padding: '0.25rem', color: '#3b82f6', backgroundColor: '#bfdbfe' }}
-            />
-          </div>
-          <p style={{ fontWeight: 'bold' }}>
-            {constDiamond}
-          </p>
-        </Card>
-        <Card style={{ width: '19%', border: '1px solid gray', height: '8.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h2 style={{ fontSize: '13px' }}>Total of requests</h2>
-            <SolutionOutlined
-              style={{ fontSize: "25px", borderRadius: '0.25rem', padding: '0.25rem', color: '#3b82f6', backgroundColor: '#bfdbfe' }}
-            />
-          </div>
-          <p style={{ fontWeight: 'bold' }}>
-            {constRequest}
-          </p>
-        </Card>
-        <Card style={{ width: '19%', border: '1px solid gray', height: '8.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h2 style={{ fontSize: '13px' }}>Total of payments</h2>
-            <TransactionOutlined
-              style={{ fontSize: "25px", borderRadius: '0.25rem', padding: '0.25rem', color: '#3b82f6', backgroundColor: '#bfdbfe' }}
-            />
-          </div>
-          <p style={{ fontWeight: 'bold' }}>
-            10
-          </p>
-        </Card>
-        <Card style={{ width: '19%', border: '1px solid gray', height: '8.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h2 style={{ fontSize: '13px' }}>Profit</h2>
-            <PropertySafetyOutlined
-              style={{ fontSize: "25px", borderRadius: '0.25rem', padding: '0.25rem', color: '#3b82f6', backgroundColor: '#bfdbfe' }}
-            />
-          </div>
-          <p style={{ fontWeight: 'bold' }}>
-            2.000.000 đ
-          </p>
-        </Card>
+      <div className="layout-content">
+        <Row className="rowgap-vbox" gutter={[20, 20]} style={{ marginBottom: "10px" }}>
+          {count.map((c, index) => (
+            <Col
+              key={index}
+              xs={24}
+              sm={24}
+              md={12}
+              lg={6}
+              xl={6}
+              className="mb-24"
+            >
+              <Card bordered={false} className="criclebox">
+                <div className="number">
+                  <Row align="middle" gutter={[20, 20]}>
+                    <Col xs={18}>
+                      <span>{c.today}</span>
+                      <Title level={3}>
+                        {c.title}
+                      </Title>
+                    </Col>
+                    <Col>
+                      <div
+                        className="icon-box"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '50px',
+                          height: '50px',
+                          borderRadius: '8px',
+                          backgroundColor: '#1890ff',
+                          color: '#fff'
+                        }}>
+                        {c.icon}
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        <Row gutter={[20, 20]}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12} className="mb-24">
+            <Card bordered={false} className="criclebox h-full">
+              <Echart />
+            </Card>
+          </Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12} className="mb-24">
+            <Card bordered={false} className="criclebox h-full">
+              <LineChart />
+            </Card>
+          </Col>
+        </Row>
       </div>
-      <Row gutter={[24, 0]} style={{ marginTop: 20 }}>
-        <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
-          <Card bordered={false} className="criclebox h-full">
-            <EChart />
-          </Card>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
-          <Card bordered={false} className="criclebox h-full">
-            <LineChart />
-          </Card>
-        </Col>
-      </Row>
     </>
   );
-};
+}
 
 export default DashBoard;

@@ -9,7 +9,7 @@ const { Sider, Content } = Layout;
 export default function AdminLayout() {
   return (
     <Layout>
-      
+
       <Sider>
         <SiderComponent />
       </Sider>
@@ -24,11 +24,8 @@ export default function AdminLayout() {
         >
           <Content
             style={{
-              padding: "30px",
-              background: "#ffffff",
+              padding: " 0 50px",
               margin: "90px 20px",
-              borderRadius: "10px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Outlet />

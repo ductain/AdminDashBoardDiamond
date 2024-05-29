@@ -10,7 +10,6 @@ const roleMapping = {
     1: "Customer",
     2: "Valuation Staff",
     3: "Consulting Staff",
-    4: "Admin"
 };
 
 const EditAccount = () => {
@@ -102,7 +101,6 @@ const EditAccount = () => {
                         <Option value="Customer">Customer</Option>
                         <Option value="Valuation Staff">Valuation Staff</Option>
                         <Option value="Consulting Staff">Consulting Staff</Option>
-                        <Option value="Admin">Admin</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item>
