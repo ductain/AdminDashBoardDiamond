@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card, Row, Col, Spin, Typography } from "antd";
-import { UserOutlined, InfoCircleOutlined, SketchOutlined } from "@ant-design/icons";
+import { UserOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import "../css/RequestDetail.css";
-
 const { Title, Text } = Typography;
 
 const RequestDetail = () => {
@@ -40,7 +39,7 @@ const RequestDetail = () => {
       <Row gutter={16}>
         <Col span={8}>
           <Card title="Request Information" bordered={false} className="info-card">
-            <InfoCircleOutlined className="icon" />
+            <InfoCircleOutlined className="icon" /> {/* dem xuogng */}
             <p><Text strong>Created Date:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
             <p><Text strong>Updated Date:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
             <p><Text strong>Note:</Text> {request.note}</p>
@@ -49,7 +48,6 @@ const RequestDetail = () => {
         </Col>
         <Col span={8}>
           <Card title="Diamond Information" bordered={false} className="info-card">
-            <SketchOutlined className="icon" />
             <img src={request.requestImage} alt="Request" className="diamond-image" />
             <p><Text strong>Carat Weight:</Text> {request.caratWeight}</p>
             <p><Text strong>Clarity:</Text> {request.clarity}</p>
@@ -66,7 +64,7 @@ const RequestDetail = () => {
         </Col>
         <Col span={8}>
           <Card title="User Information" bordered={false} className="info-card">
-            <UserOutlined className="icon" />
+            <UserOutlined className="icon" /> {/* to ra o giua co backround tron */}
             <p><Text strong>First Name:</Text> {request.firstName}</p>
             <p><Text strong>Last Name:</Text> {request.lastName}</p>
             <p><Text strong>Email:</Text> {request.email}</p>

@@ -3,7 +3,7 @@ import { Space, Table, Tag } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MySpin from "../components/MySpin";
-
+import { EditOutlined } from "@ant-design/icons";
 const Request = () => {
   const [requests, setRequests] = useState([]);
   useEffect(() => {
@@ -78,7 +78,7 @@ const Request = () => {
       key: "detail",
       render: (text, record) => (
         <Space size="middle">
-          <Link to={`/requests/detail/${record.RequestID}`}>. . .</Link>
+          <Link to={`/requests/detail/${record.RequestID}`}><EditOutlined /></Link>
         </Space>
       ),
     },

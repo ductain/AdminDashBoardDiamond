@@ -87,7 +87,18 @@ const Accounts = () => {
           onChange={(checked) => handleStatusChange(checked, record.username)}
         />
       ),
-    }
+    },
+    {
+      title: "Edit",
+      dataIndex: "edit",
+      key: "edit",
+      render: (status, record) => (
+        <Link to={`/accounts/edit/${record.id}`}>
+          <Button type="primary">Edit</Button>
+        </Link>
+      ),
+    },
+
   ];
   if (!users.length) {
     return <MySpin />;
