@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  Space,
-  Table,
-  Tag,
-  Card,
-  Row,
-  Col,
-  Radio,
-  Typography,
-  Button,
-  Avatar,
-  Progress,
-  message,
-} from "antd";
+import { Space, Table, Tag, Card, Row, Col, Radio } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
 import MySpin from "../components/MySpin";
 
-const { Title } = Typography;
-
 const Request = () => {
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState("All");
+  const [serviceFilter, setServiceFilter] = useState("All");
 
   useEffect(() => {
     const getAllRequests = async () => {
@@ -45,7 +31,11 @@ const Request = () => {
     Valuated: "purple",
     Completed: "gold",
     Locked: "red",
-    Lost: "grey",
+    Losted: "grey",
+  };
+  const serviceColors = {
+    Vip: "black",
+    Normal: "",
   };
 
   const columns = [
@@ -94,6 +84,15 @@ const Request = () => {
       ),
     },
     {
+      title: "Service",
+      key: "service",
+      render: (text, record) => (
+        <Tag color={serviceColors[record.serviceName]}>
+          {record.serviceName}
+        </Tag>
+      ),
+    },
+    {
       title: "Detail",
       key: "detail",
       render: (text, record) => (
@@ -110,9 +109,19 @@ const Request = () => {
     setFilter(e.target.value);
   };
 
-  const filteredRequests = filter === "All"
-    ? requests
-    : requests.filter(request => request.processStatus === filter);
+  const handleServiceFilterChange = (e) => {
+    setServiceFilter(e.target.value);
+  };
+
+  const filteredRequests = requests.filter(request => {
+    if (filter !== "All" && request.processStatus !== filter) {
+      return false;
+    }
+    if (serviceFilter !== "All" && request.serviceName !== serviceFilter) {
+      return false;
+    }
+    return true;
+  });
 
   if (!requests.length) return <MySpin />;
 
@@ -125,16 +134,27 @@ const Request = () => {
             className="criclebox tablespace mb-24"
             title="Requests Table"
             extra={
-              <Radio.Group onChange={handleFilterChange} defaultValue="All">
-                <Radio.Button value="All">All</Radio.Button>
-                <Radio.Button value="Pending">Pending</Radio.Button>
-                <Radio.Button value="Approved">Approved</Radio.Button>
-                <Radio.Button value="Received">Received</Radio.Button>
-                <Radio.Button value="Valuated">Valuated</Radio.Button>
-                <Radio.Button value="Completed">Completed</Radio.Button>
-                <Radio.Button value="Locked">Locked</Radio.Button>
-                <Radio.Button value="Lost">Lost</Radio.Button>
-              </Radio.Group>
+              <>
+                <div style={{ margin: " 10px 0 10px 0" }}>
+                  <Radio.Group onChange={handleFilterChange} defaultValue="All">
+                    <Radio.Button value="All">All</Radio.Button>
+                    <Radio.Button value="Pending">Pending</Radio.Button>
+                    <Radio.Button value="Approved">Approved</Radio.Button>
+                    <Radio.Button value="Received">Received</Radio.Button>
+                    <Radio.Button value="Valuated">Valuated</Radio.Button>
+                    <Radio.Button value="Completed">Completed</Radio.Button>
+                    <Radio.Button value="Locked">Locked</Radio.Button>
+                    <Radio.Button value="Losted">Losted</Radio.Button>
+                  </Radio.Group>
+                </div>
+                <div style={{ margin: " 10px 0 10px 0" }}>
+                  <Radio.Group onChange={handleServiceFilterChange} defaultValue="All">
+                    <Radio.Button value="All">All</Radio.Button>
+                    <Radio.Button value="Vip">VIP</Radio.Button>
+                    <Radio.Button value="Normal">Normal</Radio.Button>
+                  </Radio.Group>
+                </div>
+              </>
             }
           >
             <div className="table-responsive">

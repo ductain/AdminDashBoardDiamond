@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { Form, Input, Button, Card, Spin, Select, message } from "antd";
+import { Form, Input, Button, Card, Spin, Select, message, Space } from "antd";
 import { UserOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
+const { useForm } = Form;
 
 const roleMapping = {
     1: "Customer",
@@ -15,6 +16,7 @@ const roleMapping = {
 const EditAccount = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const [form] = useForm();
     const [userEdited, setUserEdited] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -24,6 +26,10 @@ const EditAccount = () => {
                 const response = await axios.get(`http://localhost:8080/api/users/${id}`, { withCredentials: true });
                 const user = response.data.user[0];
                 setUserEdited({ ...user, roleId: roleMapping[user.roleId] });
+                form.setFieldsValue({
+                    ...user,
+                    roleId: roleMapping[user.roleId],
+                });
             } catch (error) {
                 console.error(error);
             } finally {
@@ -31,10 +37,16 @@ const EditAccount = () => {
             }
         };
         fetchUser();
-    }, [id]);
+    });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
+    };
+
+    const handleInputChange = (name, value) => {
         setUserEdited({ ...userEdited, [name]: value });
     };
 
@@ -44,13 +56,13 @@ const EditAccount = () => {
 
     const handleSave = async () => {
         try {
-            const updatedUser = { ...userEdited, roleId: Object.keys(roleMapping).find(key => roleMapping[key] === userEdited.roleId) };
-            await axios.put(`http://localhost:8080/api/editUser`, updatedUser, { withCredentials: true });
+            const updatedUser = { ...userEdited, roleId: parseInt(Object.keys(roleMapping).find(key => roleMapping[key] === userEdited.roleId)) };
+            await axios.put(`http://localhost:8080/api/users`, updatedUser, { withCredentials: true });
             message.success("User information updated successfully!");
             navigate("/accounts");
         } catch (error) {
-            console.error(error);
             message.error("Failed to update user information.");
+            console.error(error);
         }
     };
 
@@ -60,53 +72,59 @@ const EditAccount = () => {
 
     return (
         <Card title="Edit Account" style={{ maxWidth: 600, margin: "auto", marginTop: 50 }}>
-            <Form layout="vertical">
-                <Form.Item label="First Name">
-                    <Input
-                        prefix={<UserOutlined />}
-                        name="firstName"
-                        value={userEdited.firstName}
-                        onChange={handleInputChange}
-                    />
+            <Form
+                form={form}
+                layout="vertical"
+                onFinish={handleSave}
+            >
+                <Form.Item
+                    label="First Name"
+                    name="firstName"
+                    rules={[{ required: true, message: 'Please input your first name!' }]}
+                >
+                    <Input prefix={<UserOutlined />} onChange={(e) => handleInputChange("firstName", e.target.value)} />
                 </Form.Item>
-                <Form.Item label="Last Name">
-                    <Input
-                        prefix={<UserOutlined />}
-                        name="lastName"
-                        value={userEdited.lastName}
-                        onChange={handleInputChange}
-                    />
+                <Form.Item
+                    label="Last Name"
+                    name="lastName"
+                    rules={[{ required: true, message: 'Please input your last name!' }]}
+                >
+                    <Input prefix={<UserOutlined />} onChange={(e) => handleInputChange("lastName", e.target.value)} />
                 </Form.Item>
-                <Form.Item label="Email">
-                    <Input
-                        prefix={<MailOutlined />}
-                        name="email"
-                        value={userEdited.email}
-                        onChange={handleInputChange}
-                    />
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
+                >
+                    <Input prefix={<MailOutlined />} onChange={(e) => handleInputChange("email", e.target.value)} />
                 </Form.Item>
-                <Form.Item label="Phone Number">
-                    <Input
-                        prefix={<PhoneOutlined />}
-                        name="phone"
-                        value={userEdited.phone}
-                        onChange={handleInputChange}
-                    />
+                <Form.Item
+                    label="Phone Number"
+                    name="phone"
+                    rules={[{ required: true, message: 'Please input your phone number!' }]}
+                >
+                    <Input prefix={<PhoneOutlined />} onChange={(e) => handleInputChange("phone", e.target.value)} />
                 </Form.Item>
-                <Form.Item label="Role">
-                    <Select
-                        value={userEdited.roleId}
-                        onChange={handleRoleChange}
-                    >
+                <Form.Item
+                    label="Role"
+                    name="roleId"
+                    rules={[{ required: true, message: 'Please select a role!' }]}
+                >
+                    <Select onChange={handleRoleChange}>
                         <Option value="Customer">Customer</Option>
                         <Option value="Valuation Staff">Valuation Staff</Option>
                         <Option value="Consulting Staff">Consulting Staff</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary" block onClick={handleSave}>
-                        Save Changes
-                    </Button>
+                <Form.Item {...tailLayout}>
+                    <Space>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                        <Link to={"/accounts"}>
+                            <Button>Cancel</Button>
+                        </Link>
+                    </Space>
                 </Form.Item>
             </Form>
         </Card>

@@ -16,18 +16,19 @@ const RequestDetail = () => {
   const [processId, setProcessId] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const getRequestDetail = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/api/requests/${id}`, { withCredentials: true });
+      setRequest(res.data.request[0]);
+      setProcessId(res.data.request[0].processId);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getRequestDetail = async () => {
-      try {
-        const res = await axios.get(`http://localhost:8080/api/requests/${id}`, { withCredentials: true });
-        setRequest(res.data.request[0]);
-        setProcessId(res.data.request[0].processId);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
     getRequestDetail();
   }, [id]);
 
@@ -35,14 +36,18 @@ const RequestDetail = () => {
     setIsModalVisible(true);
   };
 
+  const valuation = () => {
+    navigate(`/valuation/${request.RequestID}`);
+  }
+
   const handleOk = async () => {
     try {
       await axios.put(`http://localhost:8080/api/changeProcess/${id}`, {
         processId
       }, { withCredentials: true });
-      setRequest(prev => ({ ...prev, processId }));
       message.success("Trạng thái xử lý đã được cập nhật thành công");
       setIsModalVisible(false);
+      getRequestDetail();
     } catch (error) {
       message.error("Cập nhật trạng thái xử lý thất bại");
     }
@@ -53,7 +58,7 @@ const RequestDetail = () => {
   };
 
   const handleBack = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate(-1);
   };
 
   if (loading) {
@@ -87,15 +92,24 @@ const RequestDetail = () => {
       <Row gutter={16}>
         <Col span={8}>
           <Card title="Thông tin đơn hàng" bordered={false} className="info-card">
-            <InfoCircleOutlined className="icon" />
-            <p><Text strong>Ngày tạo:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
-            <p><Text strong>Ngày cập nhật:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
-            <p><Text strong>Ghi chú:</Text> {request.note}</p>
-            <p><Text strong>Trạng thái xử lý:</Text> {processStatusMap[request.processId]}</p>
+            <div className="header-container">
+              <p className="info-text"><Text strong>Ngày tạo:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
+              <div className="icon-request">
+                <InfoCircleOutlined className="icon" />
+              </div>
+            </div>
+            <p className="info-text"><Text strong>Ngày cập nhật:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
+            <p className="info-text"><Text strong>Ghi chú:</Text> {request.note}</p>
+            <p className="info-text"><Text strong>Loại dịch vụ:</Text> {request.serviceName}</p>
+            <p className="info-text"><Text strong>Trạng thái xử lý:</Text> {request.processStatus}</p>
             <Button type="primary" onClick={showModal}>Chỉnh trạng thái xử lý</Button>
           </Card>
+
+
           <Card title="Thông tin chủ kim cương" bordered={false} className="info-card">
-            <UserOutlined className="icon" />
+            <div className="icon-customer">
+              <UserOutlined className="icon" />
+            </div>
             <p><Text strong>Họ:</Text> {request.firstName}</p>
             <p><Text strong>Tên:</Text> {request.lastName}</p>
             <p><Text strong>Email:</Text> {request.email}</p>
@@ -123,20 +137,20 @@ const RequestDetail = () => {
           </Card>
         </Col>
       </Row>
-
+      <Button
+        style={{ width: '200px', height: '50px', position: 'absolute', bottom: 0, right: 16 }}
+        type="primary" onClick={valuation}
+      > Bắt đầu định giá
+      </Button>
       <Modal title="Chỉnh trạng thái xử lý" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Select
           value={processId}
           onChange={setProcessId}
           style={{ width: "100%" }}
         >
-          <Option value={1}>Pending</Option>
-          <Option value={2}>Approved</Option>
-          <Option value={3}>Received</Option>
-          <Option value={4}>Valuated</Option>
-          <Option value={5}>Completed</Option>
-          <Option value={6}>Locked</Option>
-          <Option value={7}>Losted</Option>
+          {Object.entries(processStatusMap).map(([key, value]) => (
+            <Option key={key} value={key}>{value}</Option>
+          ))}
         </Select>
       </Modal>
     </div>

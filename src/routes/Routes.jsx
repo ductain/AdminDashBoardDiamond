@@ -10,6 +10,7 @@ import Request from "../pages/Request";
 import RequestDetail from "../pages/RequestDetail";
 import EditAccount from "../pages/EditAccount";
 import Billing from "../pages/Billing";
+import Valuation from "../pages/Valuation";
 
 
 export const routes = createBrowserRouter([
@@ -50,6 +51,10 @@ export const routes = createBrowserRouter([
         path: "billing",
         element: <Billing />,
       },
+      {
+        path: "valuation/:id",
+        element: <Valuation />,
+      }
     ],
   },
   {

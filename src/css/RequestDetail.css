@@ -37,3 +37,27 @@
   height: auto;
   margin-bottom: 16px;
 }
+
+.icon-customer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px; 
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.icon-request {
+  display: flex;
+  align-items: center;
+}
+
+.info-card p {
+  margin: 0 0 10px 0; 
+}
+

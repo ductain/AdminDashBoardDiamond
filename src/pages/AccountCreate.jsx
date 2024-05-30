@@ -1,10 +1,9 @@
 import React from "react";
-import { Button, Form, Input, Select, Space, message, Card, Row, Col, Typography } from "antd";
+import { Button, Form, Input, Select, Space, message, Card, Row, Col } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const { Option } = Select;
-const { Title } = Typography;
 
 const layout = {
   labelCol: {
@@ -27,7 +26,7 @@ const AccountCreate = () => {
 
   const onFinish = (values) => {
     axios
-      .post("http://localhost:8080/api/createNewUser", values, {
+      .post("http://localhost:8080/api/users", values, {
         withCredentials: true,
       })
       .then((res) => {
@@ -106,28 +105,13 @@ const AccountCreate = () => {
               <Form.Item
                 name="email"
                 label="Email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                  {
-                    type: "email",
-                    message: "The input is not a valid email!",
-                  },
-                ]}
+
               >
                 <Input />
               </Form.Item>
               <Form.Item
                 name="phone"
                 label="Phone Number"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your phone number!",
-                  },
-                ]}
               >
                 <Input />
               </Form.Item>
