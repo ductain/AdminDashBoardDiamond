@@ -10,6 +10,7 @@ function DashBoard() {
   const [countUser, setCountUser] = useState(0);
   const [countDiamond, setCountDiamond] = useState(0);
   const [countRequest, setCountRequest] = useState(0);
+  const [profit, setProfit] = useState(0);
 
   useEffect(() => {
     const getTotalDiamond = async () => {
@@ -52,7 +53,19 @@ function DashBoard() {
     };
     getTotalRequest();
   }, []);
-
+  useEffect(() => {
+    const getProfit = async () => {
+      await axios
+        .get("http://localhost:8080/api/profit", { withCredentials: true })
+        .then((res) => {
+          setProfit(res.data.profit);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getProfit();
+  }, []);
   const count = [
     {
       today: "Total Users",
@@ -70,8 +83,8 @@ function DashBoard() {
       icon: <ReconciliationOutlined style={{ fontSize: '32px' }} />,
     },
     {
-      today: "Other Metric",
-      title: "Data",
+      today: "Profit",
+      title: profit.toString(),
       icon: <WalletOutlined style={{ fontSize: '32px' }} />,
     },
   ];
