@@ -4,7 +4,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import MySpin from "../components/MySpin";
 
-const { Title } = Typography;
 
 const Accounts = () => {
   const [users, setUsers] = useState([]);
@@ -95,16 +94,6 @@ const Accounts = () => {
           checked={status === 1}
           onChange={(checked) => handleStatusChange(checked, record.username)}
         />
-      ),
-    },
-    {
-      title: "Edit",
-      dataIndex: "edit",
-      key: "edit",
-      render: (status, record) => (
-        <Link to={`/accounts/edit/${record.id}`}>
-          <Button type="primary">Edit</Button>
-        </Link>
       ),
     },
   ];

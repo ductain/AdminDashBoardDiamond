@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Layout, Button, Row, Col, Typography, Form, Input, Switch, message, Card } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Button, Typography, Form, Input, message } from "antd";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import '../css/SignIn.css';
 
 const { Title } = Typography;
-const { Content } = Layout;
 
 const SignIn = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
