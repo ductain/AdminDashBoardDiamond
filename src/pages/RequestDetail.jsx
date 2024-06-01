@@ -30,7 +30,7 @@ const RequestDetail = () => {
 
   useEffect(() => {
     getRequestDetail();
-  }, [id]);
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -169,7 +169,8 @@ const RequestDetail = () => {
       <Modal title="Chỉnh trạng thái xử lý" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Select
           value={processId}
-          onChange={setProcessId}
+          name="processId"
+          onChange={(value) => setProcessId(value)}
           style={{ width: "100%" }}
         >
           {Object.entries(processStatusMap).map(([key, value]) => (
