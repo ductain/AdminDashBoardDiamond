@@ -166,12 +166,15 @@ const Request = () => {
                   <Radio.Group onChange={handleFilterChange} defaultValue="All">
                     <Radio.Button value="All">All</Radio.Button>
                     <Radio.Button value="Pending">Pending</Radio.Button>
-                    <Radio.Button value="Approved">Approved</Radio.Button>
+                    <Radio.Button value="Called">Called</Radio.Button>
                     <Radio.Button value="Received">Received</Radio.Button>
+                    <Radio.Button value="Start Valuated">Start Valuated</Radio.Button>
                     <Radio.Button value="Valuated">Valuated</Radio.Button>
                     <Radio.Button value="Completed">Completed</Radio.Button>
-                    <Radio.Button value="Locked">Locked</Radio.Button>
+                    <Radio.Button value="Pending Locked">Pending Locked</Radio.Button>
+                    <Radio.Button value="Pending Losted">Pending Losted</Radio.Button>
                     <Radio.Button value="Losted">Losted</Radio.Button>
+                    <Radio.Button value="Locked">Locked</Radio.Button>
                   </Radio.Group>
                 </div>
                 <div style={{ margin: " 10px 0 10px 0" }}>

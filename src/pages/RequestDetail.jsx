@@ -41,7 +41,7 @@ const RequestDetail = () => {
       await axios.put(
         `http://localhost:8080/api/changeProcess/${id}`,
         {
-          processId: 4,
+          processId: 5,
         },
         { withCredentials: true }
       );
@@ -81,12 +81,13 @@ const RequestDetail = () => {
 
   const processStatusMap = {
     1: "Pending",
-    2: "Approved",
+    2: "Called",
     3: "Received",
-    4: "Valuated",
-    5: "Completed",
-    6: "Locked",
-    7: "Losted"
+    4: "Start Valuated",
+    5: "Valuated",
+    6: "Completed",
+    9: "Losted",
+    10: "Locked"
   };
 
   return (
