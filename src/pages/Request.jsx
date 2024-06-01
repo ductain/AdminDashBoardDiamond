@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Tag, Card, Row, Col, Radio } from "antd";
+import { Space, Table, Tag, Card, Row, Col, Radio, FloatButton } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, CheckCircleOutlined, InboxOutlined, PhoneOutlined, CloseCircleOutlined, ExclamationCircleOutlined, ClockCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import MySpin from "../components/MySpin";
 
 const Request = () => {
@@ -26,17 +26,36 @@ const Request = () => {
 
   const statusColors = {
     Pending: "blue",
-    Approved: "green",
-    Received: "cyan",
+    Called: "cyan",
+    Received: "green",
+    "Start Valuated": "gold",
     Valuated: "purple",
-    Completed: "gold",
-    Locked: "red",
+    Completed: "green",
+    "Pending Locked": "orange",
+    "Pending Losted": "orange",
     Losted: "grey",
+    Locked: "red"
   };
+
   const serviceColors = {
     Vip: "black",
     Normal: "",
   };
+
+  const statusIcons = {
+    Pending: <ClockCircleOutlined />,
+    Called: <PhoneOutlined />,
+    Received: <InboxOutlined />,
+    "Start Valuated": <ClockCircleOutlined />,
+    Valuated: <ExclamationCircleOutlined />,
+    Completed: <CheckCircleOutlined />,
+    "Pending Locked": <ClockCircleOutlined />,
+    "Pending Losted": <ClockCircleOutlined />,
+    Losted: <MinusCircleOutlined />,
+    Locked: <CloseCircleOutlined />
+  };
+
+
 
   const columns = [
     {
@@ -78,7 +97,7 @@ const Request = () => {
       title: "Process",
       key: "process",
       render: (text, record) => (
-        <Tag color={statusColors[record.processStatus]}>
+        <Tag icon={statusIcons[record.processStatus]} color={statusColors[record.processStatus]}>
           {record.processStatus}
         </Tag>
       ),
@@ -127,6 +146,14 @@ const Request = () => {
 
   return (
     <div className="tabled">
+      <FloatButton
+        href=""
+        tooltip={<div>New diamond for valuate</div>}
+        badge={{
+          count: filteredRequests.length,
+          color: 'blue',
+        }}
+      />
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
           <Card

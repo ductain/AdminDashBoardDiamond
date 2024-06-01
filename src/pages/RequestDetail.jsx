@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Card, Row, Col, Spin, Typography, Button, Modal, Select, message } from "antd";
+import { Card, Row, Col, Spin, Typography, Button, Modal, Select, message, Image, Space } from "antd";
 import { UserOutlined, InfoCircleOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import "../css/RequestDetail.css";
 
@@ -36,10 +36,20 @@ const RequestDetail = () => {
     setIsModalVisible(true);
   };
 
-  const valuation = () => {
+  const valuation = async () => {
+    try {
+      await axios.put(
+        `http://localhost:8080/api/changeProcess/${id}`,
+        {
+          processId: 4,
+        },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      message.error("Cập nhật trạng thái xử lý thất bại");
+    }
     navigate(`/valuation/${request.RequestID}`);
-  }
-
+  };
   const handleOk = async () => {
     try {
       await axios.put(`http://localhost:8080/api/changeProcess/${id}`, {
@@ -133,7 +143,21 @@ const RequestDetail = () => {
         </Col>
         <Col span={8} className="diamond-card-container">
           <Card title="Ảnh kim cương" bordered={false} className="info-card">
-            <img src={request.requestImage} alt="Request" className="diamond-image" />
+            <Image.PreviewGroup>
+              <Space size={12}>
+                <Image
+                  width={200}
+                  src={request.requestImage}
+                  placeholder={
+                    <Image
+                      preview={false}
+                      src={request.requestImage}
+                      width={200}
+                    />
+                  }
+                />
+              </Space>
+            </Image.PreviewGroup>
           </Card>
         </Col>
       </Row>
