@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { message } from 'antd';
 import '../css/Login.css';
+import MySpin from "../components/MySpin";
 const Login = () => {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -12,7 +13,7 @@ const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,7 +30,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/login",
+        "https://dvs-be-sooty.vercel.app/api/login",
         credentials,
         { withCredentials: true }
       );
@@ -50,6 +51,10 @@ const Login = () => {
       setErrMessage(err.response.data.message);
     }
   };
+
+  if(loading){
+    return <MySpin />
+  }
 
   return (
     <div className="login-background">

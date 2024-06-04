@@ -24,7 +24,7 @@ const SignIn = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/login",
+        "https://dvs-be-sooty.vercel.app/api/login",
         values,
         { withCredentials: true }
       );

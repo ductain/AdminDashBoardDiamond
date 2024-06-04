@@ -4,64 +4,78 @@ import { Row, Col, Card, Typography } from "antd";
 import { UserOutlined, SendOutlined, ReconciliationOutlined, WalletOutlined } from "@ant-design/icons";
 import Echart from "../components/EChart";
 import LineChart from "../components/LineChart";
+import MySpin from "../components/MySpin";
 
 function DashBoard() {
   const { Title } = Typography;
+  const [loading, setLoading] = useState(false);
   const [countUser, setCountUser] = useState(0);
   const [countDiamond, setCountDiamond] = useState(0);
   const [countRequest, setCountRequest] = useState(0);
   const [profit, setProfit] = useState(0);
 
   useEffect(() => {
+    setLoading(true)
     const getTotalDiamond = async () => {
       await axios
-        .get("http://localhost:8080/api/countDiamond", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/countDiamond", { withCredentials: true })
         .then((res) => {
           setCountDiamond(res.data.count);
+          setLoading(false)
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false)
         });
     };
     getTotalDiamond();
   }, []);
 
   useEffect(() => {
+    setLoading(true)
     const getTotalUser = async () => {
       await axios
-        .get("http://localhost:8080/api/countUser", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/countUser", { withCredentials: true })
         .then((res) => {
           setCountUser(res.data.count);
+          setLoading(false)
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false)
         });
     };
     getTotalUser();
   }, []);
 
   useEffect(() => {
+    setLoading(true)
     const getTotalRequest = async () => {
       await axios
-        .get("http://localhost:8080/api/countRequest", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/countRequest", { withCredentials: true })
         .then((res) => {
           setCountRequest(res.data.count);
+          setLoading(false)
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false)
         });
     };
     getTotalRequest();
   }, []);
   useEffect(() => {
+    setLoading(true)
     const getProfit = async () => {
       await axios
-        .get("http://localhost:8080/api/profit", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/profit", { withCredentials: true })
         .then((res) => {
           setProfit(res.data.profit);
+          setLoading(false)
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false)
         });
     };
     getProfit();
@@ -88,6 +102,10 @@ function DashBoard() {
       icon: <WalletOutlined style={{ fontSize: '32px' }} />,
     },
   ];
+
+  if(loading){
+    return <MySpin />
+  }
 
   return (
     <>
