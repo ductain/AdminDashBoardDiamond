@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Button, Typography, Form, Input, message } from "antd";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import '../css/SignIn.css';
+import {
+  UserOutlined,
+  LockOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+} from "@ant-design/icons";
+import "../css/SignIn.css";
 
 const { Title } = Typography;
 
 const SignIn = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
-  const [errMessage, setErrMessage] = useState("");
   const [form] = Form.useForm();
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -33,6 +37,10 @@ const SignIn = () => {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.user });
         message.success("Login successful!");
         navigate("/");
+      } else if (res.data.user.role === "Manager") {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.user });
+        message.success("Login successful!");
+        navigate("/manager/requests");
       } else {
         dispatch({
           type: "LOGIN_FAILURE",
@@ -42,7 +50,7 @@ const SignIn = () => {
       }
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-      setErrMessage(err.response.data.message);
+      message.error(err.response.data.message);
     }
   };
 
@@ -95,15 +103,18 @@ const SignIn = () => {
                     <div
                       className="password-toggle"
                       onClick={handleShowHidePassword}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
-                      {isShowPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+                      {isShowPassword ? (
+                        <EyeInvisibleOutlined />
+                      ) : (
+                        <EyeOutlined />
+                      )}
                     </div>
                   }
                 />
               </div>
             </Form.Item>
-
 
             <Form.Item>
               <Button
@@ -115,7 +126,6 @@ const SignIn = () => {
                 SIGN IN
               </Button>
             </Form.Item>
-            {errMessage && <div className="error-message">{errMessage}</div>}
           </Form>
         </div>
       </div>
