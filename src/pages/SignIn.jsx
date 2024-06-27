@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Typography, Form, Input, message } from "antd";
-import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
 import {
-  UserOutlined,
-  LockOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
+  LockOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
+import { Button, Form, Input, Typography, message } from "antd";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "../css/SignIn.css";
 
 const { Title } = Typography;

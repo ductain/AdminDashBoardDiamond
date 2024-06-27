@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { ReconciliationOutlined, SendOutlined, UserOutlined, WalletOutlined } from "@ant-design/icons";
+import { Card, Col, Row, Typography } from "antd";
 import axios from "axios";
-import { Row, Col, Card, Typography } from "antd";
-import { UserOutlined, SendOutlined, ReconciliationOutlined, WalletOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 import Echart from "../components/EChart";
 import LineChart from "../components/LineChart";
 import MySpin from "../components/MySpin";
@@ -103,7 +103,7 @@ function DashBoard() {
     },
   ];
 
-  if(loading){
+  if (loading) {
     return <MySpin />
   }
 
