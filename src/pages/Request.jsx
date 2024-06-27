@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Space, Table, Tag, Card, Row, Col, Radio, FloatButton } from "antd";
+import { CheckCircleOutlined, ClockCircleOutlined, EditOutlined, ExclamationCircleOutlined, InboxOutlined, MinusCircleOutlined, PhoneOutlined } from "@ant-design/icons";
+import { Card, Col, FloatButton, Radio, Row, Space, Table, Tag } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { EditOutlined, CheckCircleOutlined, InboxOutlined, PhoneOutlined, CloseCircleOutlined, ExclamationCircleOutlined, ClockCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import MySpin from "../components/MySpin";
 
 const Request = () => {
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getAllRequests = async () => {
+      setLoading(true);
       await axios
         .get("https://dvs-be-sooty.vercel.app/api/requests", { withCredentials: true })
         .then((res) => {
+          setLoading(false);
           setRequests(res.data.requests);
         })
         .catch((error) => {
@@ -25,16 +28,23 @@ const Request = () => {
   }, []);
 
   const statusColors = {
-    Pending: "blue",
-    Called: "cyan",
-    Received: "green",
+    "Pending": "blue",
+    "Booked Appointment": "cyan",
+    "Received": "green",
+    "Approved": "gold",
+    "In Progress": "gold",
+    "Sent to Valuation": "purple",
+    "Completed": "green",
     "Start Valuated": "gold",
-    Valuated: "purple",
-    Completed: "green",
-    "Pending Locked": "orange",
-    "Pending Losted": "orange",
-    Losted: "grey",
-    Locked: "red"
+    "Valuated": "purple",
+    "Commitment": "orange",
+    "Sealing": "orange",
+    "Result Sent to Customer": "purple",
+    "Received for Valuation": "cyan",
+    "Sent to Consulting": "cyan",
+    "Unprocessed": "red",
+    "Ready for valuation": "blue",
+    "Done": "green"
   };
 
   const serviceColors = {
@@ -43,19 +53,24 @@ const Request = () => {
   };
 
   const statusIcons = {
-    Pending: <ClockCircleOutlined />,
-    Called: <PhoneOutlined />,
-    Received: <InboxOutlined />,
+    "Pending": <ClockCircleOutlined />,
+    "Booked Appointment": <PhoneOutlined />,
+    "Received": <InboxOutlined />,
+    "Approved": <ExclamationCircleOutlined />,
+    "In Progress": <ClockCircleOutlined />,
+    "Sent to Valuation": <ClockCircleOutlined />,
+    "Completed": <CheckCircleOutlined />,
     "Start Valuated": <ClockCircleOutlined />,
-    Valuated: <ExclamationCircleOutlined />,
-    Completed: <CheckCircleOutlined />,
-    "Pending Locked": <ClockCircleOutlined />,
-    "Pending Losted": <ClockCircleOutlined />,
-    Losted: <MinusCircleOutlined />,
-    Locked: <CloseCircleOutlined />
+    "Valuated": <ExclamationCircleOutlined />,
+    "Commitment": <ClockCircleOutlined />,
+    "Sealing": <ClockCircleOutlined />,
+    "Result Sent to Customer": <ExclamationCircleOutlined />,
+    "Received for Valuation": <InboxOutlined />,
+    "Sent to Consulting": <InboxOutlined />,
+    "Unprocessed": <MinusCircleOutlined />,
+    "Ready for valuation": <CheckCircleOutlined />,
+    "Done": <CheckCircleOutlined />
   };
-
-
 
   const columns = [
     {
@@ -98,7 +113,7 @@ const Request = () => {
       key: "process",
       render: (text, record) => (
         <Tag icon={statusIcons[record.processStatus]} color={statusColors[record.processStatus]}>
-          {record.processStatus}
+          {record.processStatus || "Unprocessed"}
         </Tag>
       ),
     },
@@ -116,7 +131,7 @@ const Request = () => {
       key: "detail",
       render: (text, record) => (
         <Space size="middle">
-          <Link to={`/requests/detail/${record.RequestID}`}>
+          <Link to={`/manager/requests/detail/${record.RequestID}`}>
             <EditOutlined />
           </Link>
         </Space>
@@ -165,23 +180,23 @@ const Request = () => {
                 <div style={{ margin: " 10px 0 10px 0" }}>
                   <Radio.Group onChange={handleFilterChange} defaultValue="All">
                     <Radio.Button value="All">All</Radio.Button>
+                    <Radio.Button value="Unprocessed">Unprocessed</Radio.Button>
                     <Radio.Button value="Pending">Pending</Radio.Button>
-                    <Radio.Button value="Called">Called</Radio.Button>
+                    <Radio.Button value="Booked Appointment">Booked Appointment</Radio.Button>
+                    <Radio.Button value="Approved">Approved</Radio.Button>
                     <Radio.Button value="Received">Received</Radio.Button>
-                    <Radio.Button value="Start Valuated">Start Valuated</Radio.Button>
-                    <Radio.Button value="Valuated">Valuated</Radio.Button>
+                    <Radio.Button value="Sent to Valuation">Sent Valuation</Radio.Button>
                     <Radio.Button value="Completed">Completed</Radio.Button>
-                    <Radio.Button value="Pending Locked">Pending Locked</Radio.Button>
-                    <Radio.Button value="Pending Losted">Pending Losted</Radio.Button>
-                    <Radio.Button value="Losted">Losted</Radio.Button>
-                    <Radio.Button value="Locked">Locked</Radio.Button>
+                    <Radio.Button value="Valuated">Valuated</Radio.Button>
+                    <Radio.Button value="Ready for valuation">Ready valuation</Radio.Button>
+                    <Radio.Button value="Done">Done</Radio.Button>
                   </Radio.Group>
                 </div>
                 <div style={{ margin: " 10px 0 10px 0" }}>
                   <Radio.Group onChange={handleServiceFilterChange} defaultValue="All">
                     <Radio.Button value="All">All</Radio.Button>
-                    <Radio.Button value="Vip">VIP</Radio.Button>
-                    <Radio.Button value="Normal">Normal</Radio.Button>
+                    <Radio.Button value="Advanced Valuation">Advanced Valuation</Radio.Button>
+                    <Radio.Button value="Basic Valuation">Basic Valuation</Radio.Button>
                   </Radio.Group>
                 </div>
               </>
@@ -191,7 +206,8 @@ const Request = () => {
               <Table
                 columns={columns}
                 dataSource={filteredRequests}
-                pagination={false}
+                pagination={{ pageSize: 10 }}
+                loading={loading}
                 className="ant-border-space"
               />
             </div>

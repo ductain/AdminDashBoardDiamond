@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeftOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Image, Row, Space, Spin, Typography } from "antd";
 import axios from "axios";
-import { Card, Row, Col, Spin, Typography, Button, Modal, Select, message, Image, Space } from "antd";
-import { UserOutlined, InfoCircleOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "../css/RequestDetail.css";
 
 const { Title, Text } = Typography;
-const { Option } = Select;
 
 const RequestDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [request, setRequest] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [processId, setProcessId] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
 
   const getRequestDetail = async () => {
     try {
       const res = await axios.get(`https://dvs-be-sooty.vercel.app/api/requests/${id}`, { withCredentials: true });
+      console.log(res.data.request[0]);
       setRequest(res.data.request[0]);
-      setProcessId(res.data.request[0].processId);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -30,42 +29,8 @@ const RequestDetail = () => {
 
   useEffect(() => {
     getRequestDetail();
-  }, []);
+  }, [id]);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const valuation = async () => {
-    try {
-      await axios.put(
-        `https://dvs-be-sooty.vercel.app/api/changeProcess/${id}`,
-        {
-          processId: 5,
-        },
-        { withCredentials: true }
-      );
-    } catch (error) {
-      message.error("Cập nhật trạng thái xử lý thất bại");
-    }
-    navigate(`/valuation/${request.RequestID}`);
-  };
-  const handleOk = async () => {
-    try {
-      await axios.put(`https://dvs-be-sooty.vercel.app/api/changeProcess/${id}`, {
-        processId
-      }, { withCredentials: true });
-      message.success("Trạng thái xử lý đã được cập nhật thành công");
-      setIsModalVisible(false);
-      getRequestDetail();
-    } catch (error) {
-      message.error("Cập nhật trạng thái xử lý thất bại");
-    }
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   const handleBack = () => {
     navigate(-1);
@@ -79,21 +44,11 @@ const RequestDetail = () => {
     return <div>No request found</div>;
   }
 
-  const processStatusMap = {
-    1: "Pending",
-    2: "Called",
-    3: "Received",
-    4: "Start Valuated",
-    5: "Valuated",
-    6: "Completed",
-    9: "Losted",
-    10: "Locked"
-  };
 
   return (
     <div className="request-detail-container">
       <Title level={1} className="page-title">
-        Chi Tiết Yêu Cầu Định Giá
+        Chi Tiết Yêu Cầu
         <Button
           icon={<ArrowLeftOutlined />}
           onClick={handleBack}
@@ -113,7 +68,6 @@ const RequestDetail = () => {
             <p className="info-text"><Text strong>Ghi chú:</Text> {request.note}</p>
             <p className="info-text"><Text strong>Loại dịch vụ:</Text> {request.serviceName}</p>
             <p className="info-text"><Text strong>Trạng thái xử lý:</Text> {request.processStatus}</p>
-            <Button type="primary" onClick={showModal}>Chỉnh trạng thái xử lý</Button>
           </Card>
 
 
@@ -162,23 +116,6 @@ const RequestDetail = () => {
           </Card>
         </Col>
       </Row>
-      <Button
-        style={{ width: '200px', height: '50px', position: 'absolute', bottom: 0, right: 16 }}
-        type="primary" onClick={valuation}
-      > Bắt đầu định giá
-      </Button>
-      <Modal title="Chỉnh trạng thái xử lý" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Select
-          value={processId}
-          name="processId"
-          onChange={(value) => setProcessId(value)}
-          style={{ width: "100%" }}
-        >
-          {Object.entries(processStatusMap).map(([key, value]) => (
-            <Option key={key} value={key}>{value}</Option>
-          ))}
-        </Select>
-      </Modal>
     </div>
   );
 }

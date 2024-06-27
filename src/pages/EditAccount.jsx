@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Form, Input, Select, Space, Spin, message } from "antd";
 import axios from "axios";
-import { Form, Input, Button, Card, Spin, Select, message, Space } from "antd";
-import { UserOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const { Option } = Select;
 const { useForm } = Form;

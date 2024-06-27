@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Button, Table, Switch, Modal, Card, Row, Col, Typography } from "antd";
+import { Button, Card, Col, Modal, Row, Switch, Table } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MySpin from "../components/MySpin";
 

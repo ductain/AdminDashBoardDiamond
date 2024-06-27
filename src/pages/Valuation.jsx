@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Card, List, Spin, Button, Form, Input, Select, message } from "antd";
+import { Button, Card, Col, Form, Input, List, Row, Select, Spin, message } from "antd";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 const { Option } = Select;
 
 function Valuation() {
@@ -17,7 +17,7 @@ function Valuation() {
                 .get("https://dvs-be-sooty.vercel.app/api/results", { withCredentials: true })
                 .then((res) => {
                     setResults(res.data.results);
-                    setSelectedResult(res.data.results[0]);
+
                     form.setFieldsValue(res.data.results[0]);
                     setLoading(false);
                 })
