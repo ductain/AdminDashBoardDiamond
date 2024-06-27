@@ -1,5 +1,5 @@
 import React from "react";
-import { DesktopOutlined, UserOutlined, SolutionOutlined } from "@ant-design/icons";
+import { DesktopOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 const { Sider } = Layout;
@@ -27,12 +27,6 @@ const SiderComponent = () => {
         </Menu.Item>
         <Menu.Item key="2" icon={<UserOutlined />}>
           <Link to="/accounts">Accounts</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<SolutionOutlined />}>
-          <Link to="/requests">Requests</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<SolutionOutlined />}>
-          <Link to="/billing">Billings</Link>
         </Menu.Item>
       </Menu>
     </Sider>

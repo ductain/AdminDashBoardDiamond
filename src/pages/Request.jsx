@@ -13,7 +13,7 @@ const Request = () => {
   useEffect(() => {
     const getAllRequests = async () => {
       await axios
-        .get("http://localhost:8080/api/requests", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/requests", { withCredentials: true })
         .then((res) => {
           setRequests(res.data.requests);
         })

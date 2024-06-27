@@ -12,7 +12,7 @@ const Accounts = () => {
   const getAllAccounts = async () => {
     setLoading(true);
     await axios
-      .get("http://localhost:8080/api/users", { withCredentials: true })
+      .get("https://dvs-be-sooty.vercel.app/api/users", { withCredentials: true })
       .then((res) => {
         const nonAdminUsers = res.data.users.filter(user => user.role !== 'Admin');
         setUsers(nonAdminUsers);
@@ -35,7 +35,7 @@ const Accounts = () => {
         const status = checked ? 1 : 0;
         try {
           await axios.put(
-            `http://localhost:8080/api/deleteUser?username=${username}`,
+            `https://dvs-be-sooty.vercel.app/api/deleteUser?username=${username}`,
             { status },
             { withCredentials: true }
           );

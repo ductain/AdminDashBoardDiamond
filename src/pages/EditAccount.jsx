@@ -23,7 +23,7 @@ const EditAccount = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/users/${id}`, { withCredentials: true });
+                const response = await axios.get(`https://dvs-be-sooty.vercel.app/api/users/${id}`, { withCredentials: true });
                 const user = response.data.user[0];
                 setUserEdited({ ...user, roleId: roleMapping[user.roleId] });
                 form.setFieldsValue({
@@ -57,7 +57,7 @@ const EditAccount = () => {
     const handleSave = async () => {
         try {
             const updatedUser = { ...userEdited, roleId: parseInt(Object.keys(roleMapping).find(key => roleMapping[key] === userEdited.roleId)) };
-            await axios.put(`http://localhost:8080/api/users`, updatedUser, { withCredentials: true });
+            await axios.put(`https://dvs-be-sooty.vercel.app/api/users`, updatedUser, { withCredentials: true });
             message.success("User information updated successfully!");
             navigate("/accounts");
         } catch (error) {

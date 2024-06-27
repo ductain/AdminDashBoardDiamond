@@ -3,8 +3,8 @@ import axios from "axios";
 export const fetchRequestsAndResultsData = async () => {
   try {
     const [requestsRes, resultsRes] = await Promise.all([
-      axios.get('http://localhost:8080/api/requests', { withCredentials: true }),
-      axios.get('http://localhost:8080/api/results', { withCredentials: true }),
+      axios.get('https://dvs-be-sooty.vercel.app/api/requests', { withCredentials: true }),
+      axios.get('https://dvs-be-sooty.vercel.app/api/results', { withCredentials: true }),
     ]);
 
     return {

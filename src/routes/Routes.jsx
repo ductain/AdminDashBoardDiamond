@@ -11,13 +11,14 @@ import RequestDetail from "../pages/RequestDetail";
 import EditAccount from "../pages/EditAccount";
 import Billing from "../pages/Billing";
 import Valuation from "../pages/Valuation";
+import ManagerLayout from "../layout/ManagerLayout";
 
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRoles={["Admin"]}>
         <AdminLayout />
       </ProtectedRoute>
     ),
@@ -32,20 +33,31 @@ export const routes = createBrowserRouter([
         element: <Accounts />,
       },
       {
-        path: "requests",
-        element: <Request />,
-      },
-      {
-        path: "requests/detail/:id",
-        element: <RequestDetail />,
-      },
-      {
         path: "accounts/edit/:id",
         element: <EditAccount />,
       },
       {
         path: "accounts/create",
         element: <AccountCreate />,
+      },
+    ],
+  },
+  {
+    path: "/manager",
+    element: (
+      <ProtectedRoute requiredRoles={["Manager"]}>
+        <ManagerLayout />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "requests",
+        element: <Request />,
+      },
+      {
+        path: "requests/detail/:id",
+        element: <RequestDetail />,
       },
       {
         path: "billing",

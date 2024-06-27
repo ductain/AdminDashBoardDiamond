@@ -12,7 +12,7 @@ function Billing() {
   useEffect(() => {
     const getAllRequests = async () => {
       await axios
-        .get("http://localhost:8080/api/results", { withCredentials: true })
+        .get("https://dvs-be-sooty.vercel.app/api/results", { withCredentials: true })
         .then((res) => {
           setResults(res.data.results);
           setLoading(false);
