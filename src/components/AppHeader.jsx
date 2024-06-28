@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Layout, Menu, Dropdown } from "antd";
-import { Link } from "react-router-dom";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { AuthContext } from "../context/AuthContext";
 const { Header } = Layout;
 
@@ -12,9 +11,9 @@ const AppHeader = () => {
   };
   const userMenu = (
     <Menu>
-      <Menu.Item key="profile" icon={<UserOutlined />}>
+      {/* <Menu.Item key="profile" icon={<UserOutlined />}>
         <Link to="/profile">Profile</Link>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>
         Logout
       </Menu.Item>
@@ -28,10 +27,8 @@ const AppHeader = () => {
         display: "flex",
         justifyContent: "end",
         alignItems: "center",
-
         zIndex: 1,
         width: "100%",
-        padding: "0 15%",
         boxSizing: "border-box",
       }}
     >

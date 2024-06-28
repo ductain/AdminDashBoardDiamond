@@ -8,7 +8,7 @@ function Valuation() {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState(null);
-    const [selectedResult, setSelectedResult] = useState(null);
+    // const [selectedResult, setSelectedResult] = useState(null);
     const [form] = Form.useForm();
     const navigate = useNavigate();
     useEffect(() => {
@@ -39,13 +39,13 @@ function Valuation() {
     }
 
     const handleResultChange = (result) => {
-        setSelectedResult(result);
+        // setSelectedResult(result);
         form.setFieldsValue(result);
     };
 
-    const handleFormChange = (changedFields) => {
-        setSelectedResult((prevResult) => ({ ...prevResult, ...changedFields }));
-    };
+    // const handleFormChange = (changedFields) => {
+    //     setSelectedResult((prevResult) => ({ ...prevResult, ...changedFields }));
+    // };
 
     const handleSubmit = async () => {
         try {
@@ -79,7 +79,7 @@ function Valuation() {
                             renderItem={(item) => (
                                 <List.Item onClick={() => handleResultChange(item)}>
                                     <List.Item.Meta
-                                        title={<a href="#">{item.companyName}</a>}
+                                        title={item.companyName}
                                         description={`Date Valued: ${new Date(item.dateValued).toLocaleDateString("en-GB")}`}
                                     />
                                     <div className="amount">{`$${item.price}`}</div>
@@ -95,7 +95,7 @@ function Valuation() {
                         title={<h3 className="font-semibold m-0">Diamond Information</h3>}
                         bodyStyle={{ paddingTop: "0" }}
                     >
-                        <Form form={form} layout="vertical" onValuesChange={handleFormChange}>
+                        <Form form={form} layout="vertical">
                             <Row gutter={[24, 24]}>
                                 <Col span={12}>
                                     <Form.Item label="Proportions" name="proportions" rules={[{ required: true, message: 'Please enter proportions' }]}>

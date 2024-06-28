@@ -10,13 +10,14 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "../css/SignIn.css";
+import MySpin from "../components/MySpin";
 
 const { Title } = Typography;
 
 const SignIn = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [form] = Form.useForm();
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleShowHidePassword = () => {
@@ -57,6 +58,10 @@ const SignIn = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  if(loading) {
+    return <MySpin />
+  }
 
   return (
     <div className="login-background">
