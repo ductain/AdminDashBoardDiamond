@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage";
 import Request from "../pages/Request";
 import RequestApproval from "../pages/RequestApproval";
 import RequestDetail from "../pages/RequestDetail";
+import Service from "../pages/Service";
 import Login from "../pages/SignIn";
 import Staff from "../pages/Staff";
 import Valuation from "../pages/Valuation";
@@ -41,6 +42,10 @@ export const routes = createBrowserRouter([
         path: "accounts/create",
         element: <AccountCreate />,
       },
+      {
+        path:"service",
+        element: <Service/>
+      }
     ],
   },
   {
