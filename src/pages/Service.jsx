@@ -64,9 +64,10 @@ const Service = () => {
         if (editingService) {
             // Update existing service
             try {
+                const updatedService = { ...values, serviceId: editingService.serviceId };
                 await axios.put(
-                    `https://dvs-be-sooty.vercel.app/api/service/${editingService.serviceId}`,
-                    values,
+                    `https://dvs-be-sooty.vercel.app/api/service`,
+                    updatedService,
                     { withCredentials: true }
                 );
                 getAllService();
