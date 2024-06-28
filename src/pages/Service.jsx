@@ -1,5 +1,5 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Form, Input, Modal, Row, Space, Table } from "antd";
+import { EditOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Form, Input, Modal, Row, Space, Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -18,6 +18,7 @@ const Service = () => {
         setLoading(true);
         try {
             const res = await axios.get("https://dvs-be-sooty.vercel.app/api/services", { withCredentials: true });
+            console.log(res.data.services);
             setService(res.data.services);
         } catch (error) {
             console.log(error);
@@ -26,13 +27,15 @@ const Service = () => {
         }
     };
 
-    const handleDeleteService = async (serviceId) => {
+    const handleStatusChange = (checked, serviceId) => {
         Modal.confirm({
-            title: "Are you sure you want to delete this service?",
+            title: "Are you sure you want to change the status of this service?",
             onOk: async () => {
+                const status = checked ? 1 : 0;
                 try {
-                    await axios.delete(
+                    await axios.put(
                         `https://dvs-be-sooty.vercel.app/api/service/${serviceId}`,
+                        { status },
                         { withCredentials: true }
                     );
                     getAllService();
@@ -114,17 +117,21 @@ const Service = () => {
             title: "Action",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button
-                        type="primary"
-                        onClick={() => handleDeleteService(record.serviceId)}
-                        style={{ backgroundColor: "red" }}
-                    >
-                        <DeleteOutlined />
-                    </Button>
                     <Button onClick={() => handleEditService(record)}>
                         <EditOutlined />
                     </Button>
                 </Space>
+            ),
+        },
+        {
+            title: "Status",
+            dataIndex: "status",
+            key: "status",
+            render: (status, record) => (
+                <Switch
+                    checked={status === true}
+                    onChange={(checked) => handleStatusChange(checked, record.serviceId)}
+                />
             ),
         },
     ];
