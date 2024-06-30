@@ -1,5 +1,5 @@
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Form, Input, Modal, Row, Space, Switch, Table } from "antd";
+import { Button, Card, Col, Form, Input, InputNumber, Modal, Row, Space, Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -114,7 +114,12 @@ const Service = () => {
             key: "price",
         },
         {
-            title: "Action",
+            title: "Description",
+            dataIndex: "description",
+            key: "description",
+        },
+        {
+            title: "Edit",
             render: (_, record) => (
                 <Space size="middle">
                     <Button onClick={() => handleEditService(record)}>
@@ -163,7 +168,7 @@ const Service = () => {
             </Row>
 
             <Modal
-                title={editingService ? "Edit Service" : "Create New Service"}
+                title={editingService ? 'Edit Service' : 'Create New Service'}
                 visible={isModalVisible}
                 onCancel={handleCancel}
                 footer={null}
@@ -177,16 +182,26 @@ const Service = () => {
                     <Form.Item
                         name="serviceName"
                         label="Service Name"
-                        rules={[{ required: true, message: "Please input the service name!" }]}
+                        rules={[{ required: true, message: 'Please input the service name!' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         name="price"
                         label="Price"
-                        rules={[{ required: true, message: "Please input the price!" }]}
+                        rules={[{ required: true, message: 'Please input the price!' }]}
                     >
-                        <Input />
+                        <InputNumber
+                            style={{ width: '100%' }}
+                            formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} // Format input as currency
+                            parser={(value) => value.replace(/\$\s?|(,*)/g, '')} // Parse value into a number
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="description"
+                        label="Description"
+                    >
+                        <Input.TextArea />
                     </Form.Item>
                     <Form.Item>
                         <Space>
