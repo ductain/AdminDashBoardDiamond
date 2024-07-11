@@ -62,7 +62,7 @@ const ConsultingStatistic = () => {
         const fetchData = async () => {
             try {
 
-                const response = await axios.get('https://dvs-be-sooty.vercel.app/api/consultingStaff-static');
+                const response = await axios.get('https://dvs-be-sooty.vercel.app/api/consultingStaff-static', { withCredentials: true });
                 const staffData = response.data.staff;
 
                 // Format data for ApexCharts
