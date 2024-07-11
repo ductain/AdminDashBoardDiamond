@@ -34,11 +34,13 @@ const Accounts = () => {
       onOk: async () => {
         const status = checked ? 1 : 0;
         try {
+          setLoading(true);
           await axios.put(
             `https://dvs-be-sooty.vercel.app/api/deleteUser?username=${username}`,
             { status },
             { withCredentials: true }
           );
+          setLoading(false);
           // Refresh the user list after updating the status
           getAllAccounts();
         } catch (error) {

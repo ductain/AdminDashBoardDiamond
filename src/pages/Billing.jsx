@@ -2,6 +2,7 @@ import { Avatar, Card, Col, List, Radio, Row, Spin } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+import MySpin from "../components/MySpin";
 import "../css/Billing.css";
 
 function Billing() {
@@ -9,9 +10,11 @@ function Billing() {
   const [results, setResults] = useState([]);
   const [serviceFilter, setServiceFilter] = useState("All");
 
+
   useEffect(() => {
     const getAllRequests = async () => {
       try {
+        setLoading(true);
         const res = await axios.get("https://dvs-be-sooty.vercel.app/api/bill", { withCredentials: true });
         console.log(res.data.data);
         setResults(res.data.data);
@@ -49,6 +52,9 @@ function Billing() {
   };
 
   const today = formatDate(new Date());
+  if (loading) {
+    return <MySpin />
+  }
 
   return (
     <>

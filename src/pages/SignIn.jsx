@@ -8,9 +8,9 @@ import { Button, Form, Input, Typography, message } from "antd";
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MySpin from "../components/MySpin";
 import { AuthContext } from "../context/AuthContext";
 import "../css/SignIn.css";
-import MySpin from "../components/MySpin";
 
 const { Title } = Typography;
 
@@ -59,7 +59,7 @@ const SignIn = () => {
     console.log("Failed:", errorInfo);
   };
 
-  if(loading) {
+  if (loading) {
     return <MySpin />
   }
 

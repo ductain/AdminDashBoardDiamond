@@ -1,7 +1,8 @@
 import { Button, Card, Col, Form, Input, Row, Select, Space, message } from "antd";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import MySpin from "../components/MySpin";
 
 const { Option } = Select;
 
@@ -23,13 +24,16 @@ const tailLayout = {
 const AccountCreate = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
+    setLoading(true);
     axios
       .post("https://dvs-be-sooty.vercel.app/api/users", values, {
         withCredentials: true,
       })
       .then((res) => {
+        setLoading(false);
         message.success("Created successfully");
         navigate("/accounts");
       })
@@ -37,6 +41,9 @@ const AccountCreate = () => {
         message.error(error.response.data.message);
       });
   };
+  if (loading) {
+    return <MySpin />
+  }
 
   return (
     <div className="tabled">
