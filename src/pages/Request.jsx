@@ -1,4 +1,4 @@
-import { CheckCircleOutlined, ClockCircleOutlined, EditOutlined, ExclamationCircleOutlined, InboxOutlined, MinusCircleOutlined, PhoneOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, EyeOutlined , ExclamationCircleOutlined, InboxOutlined, MinusCircleOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Card, Col, FloatButton, Row, Space, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -182,7 +182,7 @@ const Request = () => {
       render: (text, record) => (
         <Space size="middle">
           <Link to={`/manager/requests/detail/${record.RequestID}`}>
-            <EditOutlined />
+            <EyeOutlined  />
           </Link>
         </Space>
       ),
