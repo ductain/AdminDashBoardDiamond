@@ -1,13 +1,13 @@
-import { Avatar, Card, Col, Table, Radio, Row, Spin } from "antd";
+import { Card, Col, Radio, Row, Spin, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import MySpin from "../components/MySpin";
 import "../css/Billing.css";
 
 function Billing() {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
+  const [services, setServices] = useState([]);
   const [serviceFilter, setServiceFilter] = useState("All");
 
   useEffect(() => {
@@ -26,6 +26,19 @@ function Billing() {
         setLoading(false);
       }
     };
+
+    const getAllServices = async () => {
+      try {
+        const res = await axios.get(
+          "https://dvs-be-sooty.vercel.app/api/services",
+          { withCredentials: true }
+        );
+        setServices(res.data.services);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getAllServices();
     getAllRequests();
   }, []);
 
@@ -124,18 +137,11 @@ function Billing() {
                       defaultValue="All"
                     >
                       <Radio.Button value="All">All</Radio.Button>
-                      <Radio.Button value="Advanced Valuation">
-                        Advanced Valuation
-                      </Radio.Button>
-                      <Radio.Button value="Basic Valuation">
-                        Basic Valuation
-                      </Radio.Button>
-                      <Radio.Button value="Diamond Inspection">
-                        Diamond Inspection
-                      </Radio.Button>
-                      <Radio.Button value="Lower valuation">
-                        Lower Valuation
+                      {services.map(service => (
+                        <Radio.Button key={service.serviceId} value={service.serviceName}>
+                          {service.serviceName}
                         </Radio.Button>
+                      ))}
                     </Radio.Group>
                   </div>
                 </Col>
@@ -229,7 +235,7 @@ function Billing() {
           </Card>
         </Col> */}
       </Row>
-    </div>
+    </>
   );
 }
 
