@@ -17,9 +17,7 @@ const RequestDetail = () => {
   const getRequestDetail = async () => {
     try {
       const res = await axios.get(`https://dvs-be-sooty.vercel.app/api/requests/${id}`, { withCredentials: true });
-      console.log(res.data.request[0]);
-      setRequest(res.data.request[0]);
-
+      setRequest(res.data.request);
       setLoading(false);
     } catch (error) {
       console.log(error);
