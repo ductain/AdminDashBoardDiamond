@@ -61,10 +61,10 @@ const ConsultingStatistic = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setLoading(true);
+
                 const response = await axios.get('https://dvs-be-sooty.vercel.app/api/consultingStaff-static');
                 const staffData = response.data.staff;
-                setLoading(false);
+
                 // Format data for ApexCharts
                 const labels = staffData.map(staff => staff.StaffName);
                 const totalRequests = staffData.map(staff => staff.TotalRequests);
