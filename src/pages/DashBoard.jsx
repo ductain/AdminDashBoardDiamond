@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Echart from "../components/EChart";
 import LineChart from "../components/LineChart";
 import MySpin from "../components/MySpin";
+import ConsultingStatistic from "../components/consultingStatitic";
+import ValuationStatistic from "../components/valuationStatitic";
 
 function DashBoard() {
   const { Title } = Typography;
@@ -98,10 +100,11 @@ function DashBoard() {
     },
     {
       today: "Profit",
-      title: profit.toString(),
+      title: `$${(profit).toLocaleString('en-US')}`,
       icon: <WalletOutlined style={{ fontSize: '32px' }} />,
     },
   ];
+
 
   if (loading) {
     return <MySpin />
@@ -162,6 +165,19 @@ function DashBoard() {
           <Col xs={24} sm={24} md={12} lg={12} xl={12} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <LineChart />
+            </Card>
+          </Col>
+        </Row>
+
+        <Row gutter={[20, 20]}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} className="mb-24">
+            <Card bordered={false} className="criclebox h-full">
+              <ConsultingStatistic />
+            </Card>
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} className="mb-24">
+            <Card bordered={false} className="criclebox h-full">
+              <ValuationStatistic />
             </Card>
           </Col>
         </Row>
