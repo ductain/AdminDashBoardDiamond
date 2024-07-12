@@ -47,17 +47,17 @@
   }
   
   .password-container input {
-    padding-right: 40px; /* Add padding to make space for the eye icon */
+    padding-right: 40px; 
   }
   .password-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em; /* Tăng kích thước icon */
+    font-size: 1.5em; 
   }
   
   .password-container .ant-input-suffix {
-    padding-right: 10px; /* Đảm bảo icon không bị cắt */
+    padding-right: 10px; 
   }
   
   .password-container i {
