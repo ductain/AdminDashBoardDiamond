@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
-import MySpin from './MySpin';
+//import MySpin from './MySpin';
 
 const ConsultingStatistic = () => {
-    const [loading, setLoading] = useState(false);
+    //  const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
         options: {
             chart: {
@@ -91,9 +91,9 @@ const ConsultingStatistic = () => {
 
         fetchData();
     }, []);
-    if (loading) {
-        return <MySpin />
-    }
+    // if (loading) {
+    //     return <MySpin />
+    // }
     return (
         <div>
             <h2>Consulting Staff Requests and Completions</h2>
