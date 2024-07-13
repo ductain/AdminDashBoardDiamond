@@ -150,7 +150,9 @@ const RequestApproval = () => {
       render: (_, record) => {
         const isDisabled =
           record.processStatus === "Commitment" ||
-          record.processStatus === "Sealing";
+          record.processStatus === "Sealing" ||
+          record.processStatus === "Rejected Commitment" ||
+          record.processStatus === "Rejected Sealing";
         return (
           <Space size="middle">
             <Button
