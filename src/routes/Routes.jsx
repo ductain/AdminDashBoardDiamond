@@ -2,19 +2,19 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../config/ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
 import ManagerLayout from "../layout/ManagerLayout";
-import AccountCreate from "../pages/AccountCreate";
-import Accounts from "../pages/Accounts";
-import Billing from "../pages/Billing";
-import DashBoard from "../pages/DashBoard";
-import EditAccount from "../pages/EditAccount";
 import ErrorPage from "../pages/ErrorPage";
-import Request from "../pages/Request";
-import RequestApproval from "../pages/RequestApproval";
-import RequestDetail from "../pages/RequestDetail";
-import Service from "../pages/Service";
 import Login from "../pages/SignIn";
-import Staff from "../pages/Staff";
 import Valuation from "../pages/Valuation";
+import AccountCreate from './../pages/Admin/AccountCreate';
+import Accounts from './../pages/Admin/Accounts';
+import DashBoard from './../pages/Admin/DashBoard';
+import EditAccount from './../pages/Admin/EditAccount';
+import Service from './../pages/Admin/Service';
+import Billing from './../pages/Manager/Billing';
+import Request from './../pages/Manager/Request';
+import RequestApproval from './../pages/Manager/RequestApproval';
+import RequestDetail from './../pages/Manager/RequestDetail';
+import Staff from './../pages/Manager/Staff';
 
 export const routes = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ export const routes = createBrowserRouter([
         element: <AccountCreate />,
       },
       {
-        path:"service",
-        element: <Service/>
+        path: "service",
+        element: <Service />
       }
     ],
   },

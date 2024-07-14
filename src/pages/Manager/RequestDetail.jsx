@@ -3,7 +3,7 @@ import { Button, Card, Col, Image, Row, Space, Spin, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../css/RequestDetail.css";
+import "../../css/RequestDetail.css";
 
 const { Title, Text } = Typography;
 
