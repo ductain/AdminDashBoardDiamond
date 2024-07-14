@@ -1,4 +1,4 @@
-import { SolutionOutlined } from "@ant-design/icons";
+import { SolutionOutlined, UserOutlined, AccountBookOutlined, FileDoneOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -25,13 +25,13 @@ const ManagerSidebar = () => {
         <Menu.Item key="1" icon={<SolutionOutlined />}>
           <Link to="/manager/requests">Requests</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<SolutionOutlined />}>
+        <Menu.Item key="2" icon={<AccountBookOutlined />}>
           <Link to="/manager/billing">Billings</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<SolutionOutlined />}>
+        <Menu.Item key="3" icon={<UserOutlined />}>
           <Link to="/manager/staff">Staff</Link>
         </Menu.Item>
-        <Menu.Item key="4" icon={<SolutionOutlined />}>
+        <Menu.Item key="4" icon={<FileDoneOutlined />}>
           <Link to="/manager/request-approved">Request Approval</Link>
         </Menu.Item>
       </Menu>

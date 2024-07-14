@@ -1,4 +1,4 @@
-import { Card, Col, Radio, Row, Spin, Table } from "antd";
+import { Card, Col, Radio, Row, Spin, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -72,6 +72,12 @@ function Billing() {
 
   const columns = [
     {
+      title: "No.",
+      dataIndex: "no",
+      key: "no",
+      render: (_, __, index) => index + 1,
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
@@ -96,12 +102,15 @@ function Billing() {
       title: "Payment Amount",
       dataIndex: "paymentAmount",
       key: "paymentAmount",
-      render: (text) => `$${text}`,
+      render: (text) => `${text}$`,
     },
     {
       title: "Payment Status",
       dataIndex: "paymentStatus",
       key: "paymentStatus",
+      render: (status) => (
+        <Tag color={status === "Paid" ? "green" : "gold"}>{status}</Tag>
+      ),
     },
     {
       title: "Payment Date",
@@ -152,7 +161,7 @@ function Billing() {
               columns={columns}
               dataSource={filteredRequests}
               rowKey={(record) => record.id || record.email}
-              pagination={false}
+              pagination={{ pageSize: 10 }}
             />
             {/* <Row gutter={[24, 24]}>
 

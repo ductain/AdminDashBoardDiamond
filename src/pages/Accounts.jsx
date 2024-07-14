@@ -14,7 +14,7 @@ const Accounts = () => {
     await axios
       .get("https://dvs-be-sooty.vercel.app/api/users", { withCredentials: true })
       .then((res) => {
-        const nonAdminUsers = res.data.users.filter(user => user.role !== 'Admin');
+        const nonAdminUsers = res.data.users.filter(user => user.role !== 'Admin' && user.role !== "Manager");
         setUsers(nonAdminUsers);
         setLoading(false);
       })
