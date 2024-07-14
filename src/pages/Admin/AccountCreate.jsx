@@ -2,7 +2,7 @@ import { Button, Card, Col, Form, Input, Row, Select, Space, message } from "ant
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MySpin from "../components/MySpin";
+import MySpin from "../../components/MySpin";
 
 const { Option } = Select;
 

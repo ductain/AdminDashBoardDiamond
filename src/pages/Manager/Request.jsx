@@ -3,7 +3,7 @@ import { Card, Col, FloatButton, Row, Space, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MySpin from "../components/MySpin";
+import MySpin from "../../components/MySpin";
 
 const Request = () => {
   const [requests, setRequests] = useState([]);

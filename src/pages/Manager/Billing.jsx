@@ -2,7 +2,7 @@ import { Card, Col, Radio, Row, Spin, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import "../css/Billing.css";
+import "../../css/Billing.css";
 
 function Billing() {
   const [loading, setLoading] = useState(true);

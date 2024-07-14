@@ -2,11 +2,11 @@ import { ReconciliationOutlined, SendOutlined, UserOutlined, WalletOutlined } fr
 import { Card, Col, Row, Typography } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Echart from "../components/EChart";
-import LineChart from "../components/LineChart";
-import MySpin from "../components/MySpin";
-import ConsultingStatistic from "../components/consultingStatitic";
-import ValuationStatistic from "../components/valuationStatitic";
+import Echart from "../../components/EChart";
+import LineChart from "../../components/LineChart";
+import MySpin from "../../components/MySpin";
+import ConsultingStatistic from "../../components/consultingStatitic";
+import ValuationStatistic from "../../components/valuationStatitic";
 
 function DashBoard() {
   const { Title } = Typography;

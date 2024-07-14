@@ -2,7 +2,7 @@ import { Button, Card, Col, Modal, Row, Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MySpin from "../components/MySpin";
+import MySpin from "../../components/MySpin";
 
 
 const Accounts = () => {
