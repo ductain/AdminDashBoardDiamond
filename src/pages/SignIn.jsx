@@ -37,7 +37,7 @@ const SignIn = () => {
       if (res.data.user.role === "Admin") {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.user });
         message.success("Login successful!");
-        navigate("/");
+        navigate("/admin/dashboard");
       } else if (res.data.user.role === "Manager") {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.user });
         message.success("Login successful!");

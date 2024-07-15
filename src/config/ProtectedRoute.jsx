@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children, requiredRoles }) => {
     return <ErrorPage />;
   }
 
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

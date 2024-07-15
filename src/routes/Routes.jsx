@@ -18,7 +18,7 @@ import Staff from './../pages/Manager/Staff';
 
 export const routes = createBrowserRouter([
   {
-    path: "/",
+    path: "/admin",
     element: (
       <ProtectedRoute requiredRoles={["Admin"]}>
         <AdminLayout />
@@ -27,7 +27,7 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "dashboard",
         element: <DashBoard />,
       },
       {
@@ -84,7 +84,7 @@ export const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
     errorElement: <ErrorPage />
   },
