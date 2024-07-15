@@ -1,15 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
-//import MySpin from './MySpin';
+import '../css/ValuationStatistic.css';
 
 const ValuationStatistic = () => {
-    //  const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-
         options: {
             chart: {
-                stacked: false, // Set stacked to false for side-by-side columns
+                stacked: false,
                 toolbar: {
                     show: false
                 }
@@ -27,6 +25,9 @@ const ValuationStatistic = () => {
             xaxis: {
                 categories: [],
                 labels: {
+                    style: {
+                        colors: '#ffffff'
+                    },
                     formatter: function (val) {
                         return val;
                     }
@@ -34,18 +35,48 @@ const ValuationStatistic = () => {
             },
             yaxis: {
                 title: {
-                    text: 'Count'
+                    text: 'Count',
+                    style: {
+                        color: '#ffffff'
+                    }
                 },
                 labels: {
                     formatter: function (val) {
                         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    },
+                    style: {
+                        colors: '#ffffff'
                     }
                 }
             },
             legend: {
-                position: 'top'
+                position: 'top',
+                labels: {
+                    colors: '#ffffff'
+                }
             },
-            colors: ['#1383ab', '#c52125']
+            colors: ['#00BFFF', '#FF6347'],
+            tooltip: {
+                theme: 'dark',
+                style: {
+                    fontSize: '14px',
+                    fontFamily: undefined
+                },
+                onDatasetHover: {
+                    highlightDataSeries: true,
+                },
+                marker: {
+                    show: false,
+                },
+                y: {
+                    formatter: function (val) {
+                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    },
+                    title: {
+                        formatter: (seriesName) => seriesName,
+                    },
+                },
+            }
         },
         series: [
             {
@@ -62,7 +93,6 @@ const ValuationStatistic = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-
                 const response = await axios.get('https://dvs-be-sooty.vercel.app/api/valuationStaff-static', { withCredentials: true });
                 const staffData = response.data.staff;
 
@@ -93,12 +123,9 @@ const ValuationStatistic = () => {
         fetchData();
     }, []);
 
-    // if (loading) {
-    //     return <MySpin />
-    // }
     return (
-        <div>
-            <h2>Valuation Staff Requests and Completions</h2>
+        <div className="valuation-statistic-container">
+            <h2 className="chart-title">Valuation Staff Requests and Completions</h2>
             {data.options && data.series.length > 0 ? (
                 <Chart options={data.options} series={data.series} type="bar" height={400} />
             ) : (
