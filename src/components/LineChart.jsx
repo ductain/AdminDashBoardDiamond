@@ -5,7 +5,6 @@ import { MinusOutlined } from "@ant-design/icons";
 import { fetchRequestsAndResultsData, processApiData } from '../data/lineChart';
 import '../css/LineChart.css';
 
-
 const { Title, Paragraph } = Typography;
 
 function LineChart() {
@@ -73,6 +72,13 @@ function LineChart() {
     fill: {
       opacity: 1
     },
+    colors: ['#FF5733', '#1A73E8'], // Add colors for the series
+    markers: {
+      size: 4,
+      colors: ['#FF5733', '#1A73E8'],
+      strokeColors: '#fff',
+      strokeWidth: 2,
+    },
     tooltip: {
       y: {
         formatter: function (val) {
@@ -97,8 +103,8 @@ function LineChart() {
             </div>
             <div className="sales">
               <ul>
-                <li>{<MinusOutlined />} Requests</li>
-                <li>{<MinusOutlined />} Results</li>
+                <li><MinusOutlined className="icon-requests" /> Requests</li>
+                <li><MinusOutlined className="icon-results" /> Results</li>
               </ul>
             </div>
           </div>
