@@ -15,7 +15,7 @@
 }
 
 .apexcharts-canvas {
-    background: transparent linear-gradient(62deg, #00BFFF 0%, #FF6347 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(62deg, #FF6347 0%, #00BFFF 100%) 0% 0% no-repeat padding-box;
     box-shadow: 0px 4px 6px #0000001f;
     border-radius: 8px;
 }

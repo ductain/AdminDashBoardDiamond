@@ -72,7 +72,7 @@ function LineChart() {
     fill: {
       opacity: 1
     },
-    colors: ['#FF5733', '#1A73E8'], // Add colors for the series
+    colors: ['#FF5733', '#1A73E8'], 
     markers: {
       size: 4,
       colors: ['#FF5733', '#1A73E8'],
