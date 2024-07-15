@@ -4,9 +4,13 @@
 }
 .linechart {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  height: 120px;
+  padding: 20px;
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 60px;
 }
 
 .ant-typography.lastweek {
@@ -18,21 +22,26 @@
   margin: 0px;
   padding: 0px;
   list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
-.sales ul li:first-child span.anticon {
-  color: #b37feb;
+.sales ul li:first-child .icon-requests {
+  color: #FF5733; 
 }
 
-.sales ul li:last-child span.anticon {
-  color: #1890ff;
+.sales ul li:last-child .icon-results {
+  color: #1A73E8; 
 }
+
 .sales ul li {
   color: #8c8c8c;
-  margin-bottom: 3px;
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .bnb2 {

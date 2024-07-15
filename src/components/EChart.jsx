@@ -12,7 +12,7 @@ function EChart() {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState({ series: [], categories: [], years: [] });
   const [currentYear, setCurrentYear] = useState(null);
-  const [currentYearAtTable, setCurrentYearAtTable] = useState(0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +26,6 @@ function EChart() {
 
     fetchData();
   }, []);
-
 
   useEffect(() => {
     if (userData.length > 0) {
@@ -53,15 +52,12 @@ function EChart() {
     if (currentIndex > 0) {
       const prevYear = chartData.years[currentIndex - 1];
       updateChartDataForYear(prevYear);
-      setCurrentYearAtTable(prevYear + 1);
     }
-
-    console.log(currentYearAtTable);
   };
 
   const handleNextYear = () => {
     const currentIndex = chartData.years.indexOf(currentYear);
-    if (currentIndex < currentYearAtTable) {
+    if (currentIndex < chartData.years.length - 1) {
       const nextYear = chartData.years[currentIndex + 1];
       updateChartDataForYear(nextYear);
     }
@@ -70,13 +66,16 @@ function EChart() {
   const chartOptions = {
     chart: {
       type: 'bar',
-      height: 350
+      height: 350,
+      toolbar: {
+        show: false
+      }
     },
     plotOptions: {
       bar: {
         horizontal: false,
         columnWidth: '55%',
-        endingShape: 'rounded'
+        endingShape: 'rounded',
       },
     },
     dataLabels: {
@@ -84,23 +83,33 @@ function EChart() {
     },
     xaxis: {
       categories: chartData.categories,
-    },
-    yaxis: {
-      title: {
-        text: 'Number of Users'
-      },
-      min: 0,
-      max: chartData.series.length > 0 ? Math.ceil(Math.max(...chartData.series[0].data)) + 1 : 10,
-      tickAmount: chartData.series.length > 0 ? Math.ceil(Math.max(...chartData.series[0].data)) + 1 : 10,
-      forceNiceScale: true,
       labels: {
-        formatter: function (val) {
-          return Math.floor(val);
+        style: {
+          colors: '#fff'
         }
       }
     },
+    yaxis: {
+      title: {
+        text: 'Number of Users',
+        style: {
+          color: '#fff'
+        }
+      },
+      labels: {
+        style: {
+          colors: '#fff'
+        },
+        formatter: function (val) {
+          return Math.floor(val);
+        }
+      },
+      min: 0,
+      forceNiceScale: true
+    },
     fill: {
-      opacity: 1
+      opacity: 1,
+      colors: ['#7CB9E8', '#ADD8E6'] 
     },
     tooltip: {
       y: {
@@ -108,6 +117,10 @@ function EChart() {
           return val + " users";
         }
       }
+    },
+    grid: {
+      borderColor: '#90A4AE',
+      strokeDashArray: 3
     }
   };
 
@@ -117,27 +130,30 @@ function EChart() {
         <div className="loading"><Spin size="large" /></div>
       ) : (
         <>
-          <div id="chart">
-            <Title level={5}>User Registrations by Month</Title>
+          <div id="chart" className="chart-container full-width">
+            <Title level={5} className="chart-title">User Registrations by Month</Title>
             <div className="year-navigation">
               <Button
                 icon={<LeftOutlined />}
                 onClick={handlePrevYear}
                 disabled={chartData.years.indexOf(currentYear) === 0}
+                className="year-nav-button"
               />
               <Paragraph className="year-info">{currentYear}</Paragraph>
               <Button
                 icon={<RightOutlined />}
                 onClick={handleNextYear}
                 disabled={chartData.years.indexOf(currentYear) === chartData.years.length - 1}
+                className="year-nav-button"
               />
             </div>
             <ReactApexChart
               className="bar-chart"
               options={chartOptions}
-              series={chartData.series.filter(s => s.name === currentYear)}
+              series={chartData.series}
               type="bar"
               height={350}
+              width={"100%"}
             />
           </div>
         </>

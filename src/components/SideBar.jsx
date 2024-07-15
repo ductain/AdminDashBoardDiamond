@@ -2,6 +2,9 @@ import { DesktopOutlined, UserOutlined, CustomerServiceOutlined } from "@ant-des
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../assets/imgs/logoweb.png";
+import '../css/SiderComponent.css'; 
+
 const { Sider } = Layout;
 
 const SiderComponent = () => {
@@ -10,29 +13,27 @@ const SiderComponent = () => {
       style={{
         height: "100vh",
         position: "fixed",
-        background: "#000000",
+        background: "#ADD8E6", 
       }}
     >
-      <div
-      >
+      <div className="sider-logo">
         <img
-          src="https://t4.ftcdn.net/jpg/02/39/44/75/360_F_239447528_qWYSonUIwGoNC290SfOBq8Gvy3x8ownV.jpg"
-          alt="logo"
-          style={{ width: "100%", height: "180px" }}
+          src={Logo} alt="Logo"
         />
       </div>
-      <Menu theme='dark' defaultSelectedKeys={["1"]} mode="inline">
-        <Menu.Item key="1" icon={<DesktopOutlined />}>
-          <Link to="/">Dashboard</Link>
+      <Menu theme='light' defaultSelectedKeys={["1"]} mode="inline">
+        <Menu.Item key="1" icon={<DesktopOutlined />} className="sider-menu-item">
+          <Link to="/" className="sider-menu-link">Dashboard</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<UserOutlined />}>
-          <Link to="/accounts">Accounts</Link>
+        <Menu.Item key="2" icon={<UserOutlined />} className="sider-menu-item">
+          <Link to="/accounts" className="sider-menu-link">Accounts</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<CustomerServiceOutlined />}>
-          <Link to="/service">Service</Link>
+        <Menu.Item key="3" icon={<CustomerServiceOutlined />} className="sider-menu-item">
+          <Link to="/service" className="sider-menu-link">Service</Link>
         </Menu.Item>
       </Menu>
     </Sider>
   );
 };
+
 export default SiderComponent;

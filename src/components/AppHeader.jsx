@@ -11,9 +11,6 @@ const AppHeader = () => {
   };
   const userMenu = (
     <Menu>
-      {/* <Menu.Item key="profile" icon={<UserOutlined />}>
-        <Link to="/profile">Profile</Link>
-      </Menu.Item> */}
       <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>
         Logout
       </Menu.Item>
@@ -21,18 +18,18 @@ const AppHeader = () => {
   );
   return (
     <Header
-    style={{
-      backgroundColor: "#000000",
-      color: "#fff",
-      display: "flex",
-      justifyContent: "end",
-      alignItems: "center",
-      position: "fixed",
-      zIndex: 99,
-      width: "100%",
-      padding: "0 17%",
-      boxSizing: "border-box",
-    }}
+      style={{
+        backgroundColor: "#ADD8E6",
+        color: "#000",
+        display: "flex",
+        justifyContent: "end",
+        alignItems: "center",
+        position: "fixed",
+        zIndex: 99,
+        width: "100%",
+        padding: "0 17%",
+        boxSizing: "border-box",
+      }}
     >
       <Dropdown overlay={userMenu}>
         <div
@@ -42,7 +39,7 @@ const AppHeader = () => {
             cursor: "pointer",
           }}
         >
-          <span style={{ color: "#fff", marginLeft: "10px" }}>
+          <span style={{ color: "#c09c1a", marginLeft: "10px" }}>
             <Avatar
               size="large"
               style={{
@@ -54,7 +51,7 @@ const AppHeader = () => {
               {user.firstName.charAt(0)}
               {user.lastName.charAt(0)}
             </Avatar>
-            {user.firstName} {user.lastName}
+            <span style={{ fontWeight: "bold" }}>{user.firstName} {user.lastName}</span>
           </span>
         </div>
       </Dropdown>

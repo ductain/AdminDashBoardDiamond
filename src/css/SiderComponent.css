@@ -1,0 +1,22 @@
+.sider-logo {
+    padding: 20px;
+    text-align: center;
+}
+
+.sider-logo img {
+    width: 80%;
+    height: auto;
+}
+
+.sider-menu-item {
+    color: #000 !important;
+}
+
+.sider-menu-link {
+    color: #c09c1a !important;
+    font-weight: bold;
+}
+
+.ant-menu-item:hover {
+    background-color: #87CEEB !important;
+}
