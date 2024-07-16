@@ -14,6 +14,7 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../../css/Service.css"
 
 const Service = () => {
   const [service, setService] = useState([]);
@@ -33,7 +34,6 @@ const Service = () => {
         "https://dvs-be-sooty.vercel.app/api/services",
         { withCredentials: true }
       );
-      console.log(res.data.services);
       setService(res.data.services);
     } catch (error) {
       console.log(error);
@@ -125,14 +125,13 @@ const Service = () => {
       title: "Service Name",
       dataIndex: "serviceName",
       key: "serviceName",
+      render: (text) => <span className="service-name">{text}</span>,
     },
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text) => {
-        return <p>{text}$</p>;
-      },
+      render: (text) => <span className="service-price">{text}$</span>,
     },
     {
       title: "Description",
@@ -143,7 +142,7 @@ const Service = () => {
       title: "Edit",
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => handleEditService(record)}>
+          <Button className="edit-button" onClick={() => handleEditService(record)}>
             <EditOutlined />
           </Button>
         </Space>
@@ -155,6 +154,7 @@ const Service = () => {
       key: "status",
       render: (status, record) => (
         <Switch
+          className="status-switch"
           checked={status === true}
           onChange={(checked) => handleStatusChange(checked, record.serviceId)}
         />
@@ -184,6 +184,7 @@ const Service = () => {
                 loading={loading}
                 rowKey="serviceId"
                 className="ant-border-space"
+                rowClassName="service-row" // Add this line
               />
             </div>
           </Card>
@@ -209,7 +210,7 @@ const Service = () => {
               { required: true, message: "Please input the service name!" },
             ]}
           >
-            <Input />
+            <Input className="input-field" />
           </Form.Item>
           <Form.Item
             name="price"
@@ -220,12 +221,13 @@ const Service = () => {
               style={{ width: "100%" }}
               formatter={(value) =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              } // Format input as currency
-              parser={(value) => value.replace(/\$\s?|(,*)/g, "")} // Parse value into a number
+              }
+              parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+              className="input-number-field"
             />
           </Form.Item>
           <Form.Item name="description" label="Description">
-            <Input.TextArea />
+            <Input.TextArea className="textarea-field" />
           </Form.Item>
           <Form.Item>
             <Space>

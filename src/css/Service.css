@@ -1,0 +1,48 @@
+.service-name {
+    color: #1e90ff; 
+    font-weight: bold;
+  }
+  
+  .service-price {
+    color: #32cd32; 
+  }
+  
+  .edit-button {
+    background-color: #ff6347; 
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background-color: #ff4500;
+    color: white;
+  }
+  
+  .status-switch {
+    background-color: #ff4d4f; 
+  }
+  
+  .status-switch.ant-switch-checked {
+    background-color: #32cd32; 
+  }
+  
+  .service-row {
+    background-color: #f0f8ff; 
+  }
+  
+  .service-row:hover {
+    background-color: #e6e6fa;
+  }
+  
+  .input-field,
+  .input-number-field,
+  .textarea-field {
+    border-color: #1e90ff; 
+  }
+  
+  .input-field:focus,
+  .input-number-field:focus,
+  .textarea-field:focus {
+    border-color: #32cd32; 
+    box-shadow: 0 0 0 2px rgba(50, 205, 50, 0.2);
+  }
+  
