@@ -1,68 +1,135 @@
 .tabled {
-    background-color: #f0f8ff; 
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .criclebox {
-    border: 2px solid #1890ff; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tablespace {
-    margin-bottom: 24px;
-  }
-  
-  .ant-card-head-title {
-    color: #1890ff; 
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  .table-responsive {
-    overflow-x: auto;
-  }
-  
-  .ant-table {
-    background-color: #ffffff; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ant-table-thead > tr > th {
-    background-color: #e6f7ff; 
-    color: #1890ff; 
-    font-weight: bold;
-  }
-  
-  .ant-table-tbody > tr > td {
-    background-color: #fafafa; 
-  }
-  
-  .ant-btn-primary {
-    background-color: #1890ff; 
-    border-color: #1890ff;
-  }
-  
-  .ant-btn-primary:hover {
-    background-color: #40a9ff; 
-    border-color: #40a9ff;
-  }
-  
-  .ant-switch-checked {
-    background-color: #52c41a; 
-  }
-  
-  .ant-switch {
-    background-color: #ff4d4f; 
-  }
-  
-  .ant-pagination-item-active a {
-    color: #1890ff; 
-  }
-  
-  .ant-pagination-item:hover a {
-    color: #40a9ff; 
-  }
-  
+  background-color: #f0f8ff; 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.criclebox {
+  border: 2px solid #1890ff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tablespace {
+  margin-bottom: 24px;
+}
+
+.ant-card-head-title {
+  color: #1890ff; 
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.ant-table {
+  background-color: #ffffff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ant-table-thead > tr > th {
+  background-color: #e6f7ff; 
+  color: #1890ff; 
+  font-weight: bold;
+}
+
+.ant-table-tbody > tr > td {
+  background-color: #fafafa; 
+}
+
+.ant-btn-primary {
+  background-color: #1890ff; 
+  border-color: #1890ff;
+}
+
+.ant-btn-primary:hover {
+  background-color: #40a9ff; 
+  border-color: #40a9ff;
+}
+
+.ant-switch-checked {
+  background-color: #52c41a; 
+}
+
+.ant-switch {
+  background-color: #ff4d4f; 
+}
+
+.ant-pagination-item-active a {
+  color: #1890ff; 
+}
+
+.ant-pagination-item:hover a {
+  color: #40a9ff; 
+}
+
+.no-column {
+  color: #ff6347;
+}
+
+.first-name-column {
+  color: #1e90ff; 
+}
+
+.last-name-column {
+  color: #32cd32; 
+}
+
+.username-column {
+  color: #ffa500; 
+}
+
+.email-column {
+  color: #800080; 
+}
+
+.phone-column {
+  color: #ff4500; 
+}
+
+.role-column {
+  color: #20b2aa; 
+}
+
+.status-switch-active {
+  background-color: #52c41a !important; 
+}
+
+.status-switch-inactive {
+  background-color: #ff4d4f !important; 
+}
+
+.accounts-container {
+  background-color: #f0f8ff; 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.accounts-card {
+  border: 2px solid #1890ff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accounts-table {
+  overflow-x: auto;
+}
+
+.ant-table {
+  background-color: #ffffff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ant-table-thead > tr > th {
+  background-color: #e6f7ff; 
+  color: #1890ff; 
+  font-weight: bold;
+}
+
+.ant-table-tbody > tr > td {
+  background-color: #fafafa; 
+}

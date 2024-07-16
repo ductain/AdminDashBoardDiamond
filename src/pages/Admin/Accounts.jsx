@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MySpin from "../../components/MySpin";
-import "../../css/Accounts.css"
+import "../../css/Accounts.css";
 
 const Accounts = () => {
   const [users, setUsers] = useState([]);
@@ -55,37 +55,43 @@ const Accounts = () => {
       title: "No.",
       dataIndex: "no",
       key: "no",
-      render: (_, __, index) => index + 1,
+      render: (_, __, index) => <span className="no-column">{index + 1}</span>,
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
+      render: (text) => <span className="first-name-column">{text}</span>,
     },
     {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
+      render: (text) => <span className="last-name-column">{text}</span>,
     },
     {
       title: "Username",
       dataIndex: "username",
       key: "username",
+      render: (text) => <span className="username-column">{text}</span>,
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      render: (text) => <span className="email-column">{text}</span>,
     },
     {
       title: "Phone number",
       dataIndex: "phone",
       key: "phone",
+      render: (text) => <span className="phone-column">{text}</span>,
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
+      render: (text) => <span className="role-column">{text}</span>,
     },
     {
       title: "Status",
@@ -93,6 +99,7 @@ const Accounts = () => {
       key: "status",
       render: (status, record) => (
         <Switch
+          className={status === 1 ? "status-switch-active" : "status-switch-inactive"}
           checked={status === 1}
           onChange={(checked) => handleStatusChange(checked, record.username)}
         />
@@ -105,12 +112,12 @@ const Accounts = () => {
   }
 
   return (
-    <div className="tabled">
+    <div className="tabled accounts-container">
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
           <Card
             bordered={false}
-            className="criclebox tablespace mb-24"
+            className="criclebox tablespace mb-24 accounts-card"
             title="Accounts Table"
             extra={
               <Link to={"/accounts/create"}>
@@ -118,7 +125,7 @@ const Accounts = () => {
               </Link>
             }
           >
-            <div className="table-responsive">
+            <div className="table-responsive accounts-table">
               <Table
                 columns={columns}
                 dataSource={users}
