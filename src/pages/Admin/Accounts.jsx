@@ -120,7 +120,7 @@ const Accounts = () => {
             className="criclebox tablespace mb-24 accounts-card"
             title="Accounts Table"
             extra={
-              <Link to={"/accounts/create"}>
+              <Link to={"/admin/accounts/create"}>
                 <Button type="primary">Create New User</Button>
               </Link>
             }
