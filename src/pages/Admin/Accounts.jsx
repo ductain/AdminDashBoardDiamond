@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MySpin from "../../components/MySpin";
-import "../../css/Accounts.css"
+import "../../css/Accounts.css";
 
 const Accounts = () => {
   const [users, setUsers] = useState([]);
@@ -113,7 +113,7 @@ const Accounts = () => {
             className="criclebox tablespace mb-24"
             title="Accounts Table"
             extra={
-              <Link to={"/accounts/create"}>
+              <Link to={"/admin/accounts/create"}>
                 <Button type="primary">Create New User</Button>
               </Link>
             }
