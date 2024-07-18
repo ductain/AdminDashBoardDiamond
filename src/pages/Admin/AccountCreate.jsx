@@ -35,7 +35,7 @@ const AccountCreate = () => {
       .then((res) => {
         setLoading(false);
         message.success("Created successfully");
-        navigate("/accounts");
+        navigate("/admin/accounts");
       })
       .catch((error) => {
         message.error(error.response.data.message);
@@ -144,7 +144,7 @@ const AccountCreate = () => {
                   <Button type="primary" htmlType="submit">
                     Submit
                   </Button>
-                  <Link to={"/accounts"}>
+                  <Link to={"/admin/accounts"}>
                     <Button>Cancel</Button>
                   </Link>
                 </Space>
