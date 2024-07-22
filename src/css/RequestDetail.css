@@ -1,6 +1,6 @@
 .request-detail-container {
   padding: 24px;
-  position: relative; /* Add relative positioning to the container */
+  position: relative; 
 }
 
 .page-title {
@@ -17,6 +17,8 @@
 
 .info-card {
   margin-bottom: 16px;
+  color: #c09c1a;
+  font-weight: bold;
 }
 
 .loading {
@@ -35,7 +37,7 @@
 .diamond-image {
   width: 100%;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .icon-customer {

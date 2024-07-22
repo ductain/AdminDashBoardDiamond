@@ -77,13 +77,13 @@ const RequestApproval = () => {
 
   const columns = [
     {
-      title: "No.",
+      title: <span style={{ color: '#c09c1a' }}><strong>No.</strong></span>,
       dataIndex: "no",
       key: "no",
       render: (_, __, index) => index + 1,
     },
     {
-      title: "Image",
+      title:<span style={{ color: '#c09c1a' }}><strong>Image</strong></span>,
       dataIndex: "requestImage",
       key: "requestImage",
       render: (image) => (
@@ -95,23 +95,23 @@ const RequestApproval = () => {
       ),
     },
     {
-      title: "Note",
+      title: <span style={{ color: '#c09c1a' }}><strong>Note</strong></span>,
       dataIndex: "note",
       key: "note",
     },
     {
-      title: "Created Date",
+      title: <span style={{ color: '#c09c1a' }}><strong>Created Date</strong></span>,
       dataIndex: "createdDate",
       key: "createdDate",
       render: (date) => new Date(date).toLocaleDateString("en-GB"),
     },
     {
-      title: "Description",
+      title: <span style={{ color: '#c09c1a' }}><strong>Description</strong></span>,
       dataIndex: "description",
       key: "description",
     },
     {
-      title: "Process",
+      title:<span style={{ color: '#c09c1a' }}><strong>Process</strong></span>,
       dataIndex: "process",
       filters: [
         {
@@ -134,7 +134,7 @@ const RequestApproval = () => {
       ),
     },
     {
-      title: "Detail",
+      title: <span style={{ color: '#c09c1a' }}><strong>Detail	</strong></span>,
       key: "detail",
       render: (text, record) => (
         <Space size="middle">
@@ -145,7 +145,7 @@ const RequestApproval = () => {
       ),
     },
     {
-      title: "Action",
+      title: <span style={{ color: '#c09c1a' }}><strong>Action</strong></span>,
       key: "action",
       render: (_, record) => {
         const isDisabled =
@@ -165,7 +165,7 @@ const RequestApproval = () => {
               Approve
             </Button>
             <Button
-              style={{ backgroundColor: "red" }}
+              style={{ backgroundColor: "#87CEEB", color: 'black' }}
               type="primary"
               onClick={() => handleReject(record.requestId, record.requestType)}
               disabled={isDisabled}

@@ -72,40 +72,40 @@ function Billing() {
 
   const columns = [
     {
-      title: "No.",
+      title: <span style={{ color: '#c09c1a' }}><strong>No.</strong></span>,
       dataIndex: "no",
       key: "no",
       render: (_, __, index) => index + 1,
     },
     {
-      title: "Name",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Name</strong></span>,
       dataIndex: "name",
       key: "name",
       render: (text, record) => `${record.firstName} ${record.lastName}`,
     },
     {
-      title: "Email Address",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Email Address</strong></span>,
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "Phone",
+      title: <span style={{ color: '#c09c1a' }}><strong>Phone</strong></span>,
       dataIndex: "phone",
       key: "phone",
     },
     {
-      title: "Service Name",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Service Name</strong></span>,
       dataIndex: "serviceName",
       key: "serviceName",
     },
     {
-      title: "Payment Amount",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Payment Amount</strong></span>,
       dataIndex: "paymentAmount",
       key: "paymentAmount",
       render: (text) => `${text}$`,
     },
     {
-      title: "Payment Status",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Payment Status</strong></span>,
       dataIndex: "paymentStatus",
       key: "paymentStatus",
       render: (status) => (
@@ -113,7 +113,7 @@ function Billing() {
       ),
     },
     {
-      title: "Payment Date",
+      title:  <span style={{ color: '#c09c1a' }}><strong>Payment Date</strong></span>,
       dataIndex: "paymentDate",
       key: "paymentDate",
       render: (text) => formatDate(text),
@@ -137,7 +137,7 @@ function Billing() {
             title={
               <Row justify="space-between" align="middle">
                 <Col>
-                  <h2 className="font-semibold m-0">Billing Information</h2>
+                  <h1 className="font-semibold m-0">Billing Information</h1>
                 </Col>
                 <Col>
                   <div style={{ margin: "10px 0" }}>
@@ -161,7 +161,7 @@ function Billing() {
               columns={columns}
               dataSource={filteredRequests}
               rowKey={(record) => record.id || record.email}
-              pagination={{ pageSize: 10 }}
+              pagination={{ pageSize: 6 }}
             />
             {/* <Row gutter={[24, 24]}>
 
