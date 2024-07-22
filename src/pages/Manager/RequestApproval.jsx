@@ -1,7 +1,7 @@
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
-  EditOutlined,
+  EyeOutlined,
   ExclamationCircleOutlined,
   InboxOutlined,
   MinusCircleOutlined,
@@ -139,7 +139,7 @@ const RequestApproval = () => {
       render: (text, record) => (
         <Space size="middle">
           <Link to={`/manager/requests/detail/${record.requestId}`}>
-            <EditOutlined />
+            <EyeOutlined />
           </Link>
         </Space>
       ),
