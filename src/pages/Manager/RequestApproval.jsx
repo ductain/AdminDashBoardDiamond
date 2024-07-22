@@ -165,8 +165,7 @@ const RequestApproval = () => {
               Approve
             </Button>
             <Button
-              style={{ backgroundColor: "#87CEEB", color: 'black' }}
-              type="primary"
+              style={{ backgroundColor: "red", color: 'white' }}
               onClick={() => handleReject(record.requestId, record.requestType)}
               disabled={isDisabled}
             >

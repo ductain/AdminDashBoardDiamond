@@ -125,7 +125,7 @@ const Service = () => {
       title: "Service Name",
       dataIndex: "serviceName",
       key: "serviceName",
-      render: (text) => <span className="service-name">{text}</span>,
+      render: (text) => <span>{text}</span>,
     },
     {
       title: "Price",
@@ -142,7 +142,7 @@ const Service = () => {
       title: "Edit",
       render: (_, record) => (
         <Space size="middle">
-          <Button className="edit-button" onClick={() => handleEditService(record)}>
+          <Button type="primary" onClick={() => handleEditService(record)}>
             <EditOutlined />
           </Button>
         </Space>

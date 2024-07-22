@@ -22,7 +22,7 @@ const ManagerSidebar = () => {
           src={Logo} alt="Logo"
         />
       </div>
-      <Menu theme='light' defaultSelectedKeys={["1"]} mode="inline">
+      <Menu style={{backgroundColor: '#ADD8E6'}} defaultSelectedKeys={["1"]} mode="inline">
         <Menu.Item key="1" icon={<SolutionOutlined />} className="sider-menu-item">
           <Link to="/manager/requests" className="sider-menu-link">Requests</Link>
         </Menu.Item>

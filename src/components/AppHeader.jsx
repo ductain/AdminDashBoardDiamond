@@ -39,7 +39,7 @@ const AppHeader = () => {
             cursor: "pointer",
           }}
         >
-          <span style={{ color: "#c09c1a", marginLeft: "10px" }}>
+          <span style={{ marginLeft: "10px" }}>
             <Avatar
               size="large"
               style={{

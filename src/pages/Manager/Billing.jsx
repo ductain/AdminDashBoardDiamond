@@ -137,7 +137,7 @@ function Billing() {
             title={
               <Row justify="space-between" align="middle">
                 <Col>
-                  <h1 className="font-semibold m-0">Billing Information</h1>
+                  <h1>Billing Information</h1>
                 </Col>
                 <Col>
                   <div style={{ margin: "10px 0" }}>
