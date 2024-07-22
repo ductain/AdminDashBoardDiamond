@@ -44,7 +44,7 @@ const RequestDetail = () => {
   return (
     <div className="request-detail-container">
       <Title level={1} className="page-title">
-        Chi Tiết Yêu Cầu
+      Requirements Details
         <Button
           icon={<ArrowLeftOutlined />}
           onClick={handleBack}
@@ -52,48 +52,48 @@ const RequestDetail = () => {
         />
       </Title>
       <Row gutter={16}>
-        <Col span={8}>
-          <Card title="Thông tin đơn hàng" bordered={false} className="info-card">
+        <Col span={10}>
+          <Card title={<span style={{ color: 'black' }}>Order Information</span>} bordered={false} className="info-card">
             <div className="header-container">
-              <p className="info-text"><Text strong>Ngày tạo:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
+              <p className="info-text"><Text strong>Create Date:</Text> {new Date(request.createdDate).toLocaleDateString("en-GB")}</p>
               <div className="icon-request">
                 <InfoCircleOutlined className="icon" />
               </div>
             </div>
-            <p className="info-text"><Text strong>Ngày cập nhật:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
-            <p className="info-text"><Text strong>Ghi chú:</Text> {request.note}</p>
-            <p className="info-text"><Text strong>Loại dịch vụ:</Text> {request.serviceName}</p>
-            <p className="info-text"><Text strong>Trạng thái xử lý:</Text> {request.processStatus}</p>
+            <p className="info-text"><Text strong>Update Date:</Text> {new Date(request.updatedDate).toLocaleDateString("en-GB")}</p>
+            <p className="info-text"><Text strong>Note:</Text> {request.note}</p>
+            <p className="info-text"><Text strong>Service Name:</Text> {request.serviceName}</p>
+            <p className="info-text"><Text strong>Process Status:</Text> {request.processStatus}</p>
           </Card>
 
 
-          <Card title="Thông tin chủ kim cương" bordered={false} className="info-card">
+          <Card title={<span style={{ color: 'black' }}>Owner Diamond Information</span>} bordered={false} className="info-card">  
             <div className="icon-customer">
               <UserOutlined className="icon" />
             </div>
-            <p><Text strong>Họ:</Text> {request.firstName}</p>
-            <p><Text strong>Tên:</Text> {request.lastName}</p>
+            <p><Text strong>First name:</Text> {request.firstName}</p>
+            <p><Text strong>Last name:</Text> {request.lastName}</p>
             <p><Text strong>Email:</Text> {request.email}</p>
-            <p><Text strong>Số điện thoại:</Text> {request.phone}</p>
+            <p><Text strong>Phone number:</Text> {request.phone}</p>
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="Thông tin kim cương" bordered={false} className="info-card">
-            <p><Text strong>Trọng lượng Carat:</Text> {request.caratWeight}</p>
-            <p><Text strong>Độ trong:</Text> {request.clarity}</p>
-            <p><Text strong>Màu sắc:</Text> {request.color}</p>
-            <p><Text strong>Giác cắt:</Text> {request.cut}</p>
-            <p><Text strong>Xuất xứ kim cương:</Text> {request.diamondOrigin}</p>
-            <p><Text strong>Huỳnh quang:</Text> {request.fluorescence}</p>
-            <p><Text strong>Kích thước:</Text> {request.measurements}</p>
-            <p><Text strong>Đánh bóng:</Text> {request.polish}</p>
-            <p><Text strong>Tỷ lệ:</Text> {request.proportions}</p>
-            <p><Text strong>Hình dạng:</Text> {request.shape}</p>
-            <p><Text strong>Độ đối xứng:</Text> {request.symmetry}</p>
+          <Card title={<span style={{ color: 'black' }}>Diamond Information</span>} bordered={false} className="info-card">
+            <p><Text strong>Carat weight:</Text> {request.caratWeight}</p>
+            <p><Text strong>Clarity:</Text> {request.clarity}</p>
+            <p><Text strong>Color:</Text> {request.color}</p>
+            <p><Text strong>Cut:</Text> {request.cut}</p>
+            <p><Text strong>Diamond origin:</Text> {request.diamondOrigin}</p>
+            <p><Text strong>Fluorescence:</Text> {request.fluorescence}</p>
+            <p><Text strong>Size:</Text> {request.measurements}</p>
+            <p><Text strong>Polish:</Text> {request.polish}</p>
+            <p><Text strong>Proportions:</Text> {request.proportions}</p>
+            <p><Text strong>Shape:</Text> {request.shape}</p>
+            <p><Text strong>Symmetry:</Text> {request.symmetry}</p>
           </Card>
         </Col>
-        <Col span={8} className="diamond-card-container">
-          <Card title="Ảnh kim cương" bordered={false} className="info-card">
+        <Col span={6} className="diamond-card-container">
+          <Card title={<span style={{ color: 'black' }}>Diamond Image</span>} bordered={false} className="info-card">
             <Image.PreviewGroup>
               <Space size={12}>
                 <Image
