@@ -3,6 +3,7 @@ import ProtectedRoute from "../config/ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
 import ManagerLayout from "../layout/ManagerLayout";
 import ErrorPage from "../pages/ErrorPage";
+import FeedBack from "../pages/Manager/FeedBack";
 import Login from "../pages/SignIn";
 import Valuation from "../pages/Valuation";
 import AccountCreate from './../pages/Admin/AccountCreate';
@@ -80,6 +81,10 @@ export const routes = createBrowserRouter([
       {
         path: "request-approved",
         element: <RequestApproval />,
+      },
+      {
+        path: "feedback",
+        element: <FeedBack />,
       }
     ],
   },

@@ -1,10 +1,10 @@
-import { SolutionOutlined, UserOutlined, AccountBookOutlined, FileDoneOutlined } from "@ant-design/icons";
+import { AccountBookOutlined, FileDoneOutlined, SolutionOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../assets/imgs/logoweb.png";
-import '../css/SiderComponent.css'; 
+import '../css/SiderComponent.css';
 
 const { Sider } = Layout;
 
@@ -34,6 +34,9 @@ const ManagerSidebar = () => {
         </Menu.Item>
         <Menu.Item key="4" icon={<FileDoneOutlined />} className="sider-menu-item">
           <Link to="/manager/request-approved" className="sider-menu-link">Request Approval</Link>
+        </Menu.Item>
+        <Menu.Item key="5" icon={<FileDoneOutlined />} className="sider-menu-item">
+          <Link to="/manager/feedback" className="sider-menu-link">FeedBack</Link>
         </Menu.Item>
       </Menu>
     </Sider>
